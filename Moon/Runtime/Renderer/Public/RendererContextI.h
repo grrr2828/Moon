@@ -6,9 +6,9 @@ namespace moon {
 
 	struct RendererContextI
 	{
-		virtual RendererType GetRendererType() const = 0;
+		virtual RendererType GetRendererType() const { return RendererType::Count; };
 
-		void RenderFrame() {};
+		virtual void BufferClear() {};
 	};
 
 }

@@ -12,6 +12,17 @@ namespace moon {
 		Clear();
 	}
 
+	void CommandBuffer::Exce()
+	{
+		int size = buffer.size();
+
+		for (size_t i = 0; i < size; i++)
+		{
+			auto cmd = buffer[i];
+			cmd->ExecuteCommand();
+		}
+	}
+
 	void CommandBuffer::Add(Command* cmd)
 	{
 		buffer.push_back( cmd );

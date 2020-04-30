@@ -10,7 +10,7 @@ namespace moon {
 
 	RendererPipeline::~RendererPipeline()
 	{
-	
+		
 	}
 
 	void RendererPipeline::AddRender(Renderer* render)
@@ -30,15 +30,24 @@ namespace moon {
 		}
 	}
 
+	void RendererPipeline::AddCommandPre(Command* cmd)
+	{
+		_cmdPre.Add( cmd );
+	}
+
+	void RendererPipeline::AddCommandPost(Command* cmd)
+	{
+		_cmdPost.Add( cmd );
+	}
+
 	void RendererPipeline::Render()
 	{
-		int size = _renderList.size();
 
-		for (size_t i = 0; i < size; i++)
-		{
-			auto render = _renderList[i];
+		_cmdPre.Exce();
 
-		}
+
+
+		_cmdPost.Exce();
 	}
 	
 }

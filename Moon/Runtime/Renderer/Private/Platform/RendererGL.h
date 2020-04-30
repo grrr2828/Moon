@@ -12,6 +12,8 @@ namespace moon {
 		~RendererContextGL();
 
 		RendererType GetRendererType() const override;
+
+		void BufferClear() override;
 	};
 
 }

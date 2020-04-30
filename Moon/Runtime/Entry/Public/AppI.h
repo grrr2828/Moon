@@ -1,17 +1,23 @@
 #pragma once
 
+#include "RendererProcessor.h"
+
 namespace moon {
 	
 	class AppI
 	{
 	public:
-		AppI(const char* name);
+		AppI();
 
-		virtual ~AppI() = 0;
+		virtual ~AppI();
 
-		virtual bool update();
+		virtual bool Update();
 
-		int runApp();
+		virtual void RenderFrame();
+
+		RendererProcessor* rendererProcessor;
+	private:
+
 
 	};
 }

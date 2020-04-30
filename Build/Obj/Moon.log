@@ -1,0 +1,9 @@
+﻿  AppI.cpp
+  Moon.cpp
+  Device_glfw.cpp
+  Renderer.cpp
+  RendererPipeline.cpp
+  RendererProcessor.cpp
+E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer\Private\RendererProcessor.cpp(34,24): warning C4018: “<”: 有符号/无符号不匹配
+  正在生成代码...
+  Moon.vcxproj -> E:\Users\Administrator\source\repos\Moon\\Build\Moon.exe

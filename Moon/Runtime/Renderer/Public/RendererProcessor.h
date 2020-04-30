@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RendererPipeline.h"
+#include "RendererContextI.h"
 
 namespace moon {
 
@@ -14,7 +15,9 @@ namespace moon {
 
 		void Run();
 
+		RendererContextI* r_ctx;
 	private:
-
+		
+		std::vector<RendererPipeline*> _pipelineList;
 	};
 }

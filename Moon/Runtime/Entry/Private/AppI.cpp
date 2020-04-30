@@ -1,30 +1,28 @@
 #include "AppI.h"
+#include "Context.h"
+#include "RendererGL.h"
 
 namespace moon {
 
-	AppI::AppI(const char* name)
+	AppI::AppI()
 	{
-		
+		rendererProcessor = new RendererProcessor();
 	}
 
 	AppI::~AppI()
 	{
-
+		delete rendererProcessor;
+		rendererProcessor = nullptr;
 	}
 
-	bool AppI::update()
+	bool AppI::Update()
 	{
 		return false;
 	}
 
-	int AppI::runApp()
+	void AppI::RenderFrame()
 	{
-		while (this->update())
-		{
-			
-		}
-
-		return 0;
+		rendererProcessor->Run();
 	}
 
 }

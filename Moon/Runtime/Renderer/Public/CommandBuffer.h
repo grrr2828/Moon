@@ -12,6 +12,7 @@ namespace moon {
 		enum CommandEnum
 		{
 			RendererInit,
+			RendererBufferClear,
 		};
 
 
@@ -30,6 +31,8 @@ namespace moon {
 		void Add(Command* cmd);
 
 		void Clear();
+
+		void Exce();
 
 	private:
 

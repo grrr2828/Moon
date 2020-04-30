@@ -111,6 +111,9 @@
     <ClInclude Include="Runtime\Camera\Public\Camera.h">
       <Filter>Engine\Runtime\Camera\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Runtime\Context.h">
+      <Filter>Engine\Runtime</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Moon.cpp">

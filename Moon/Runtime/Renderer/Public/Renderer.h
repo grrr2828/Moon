@@ -1,8 +1,35 @@
 #pragma once
 
 #include "Mesh.h"
+#include "CommandBuffer.h"
+#include "RendererContextI.h"
 
 namespace moon {
+
+
+	class  RendererCommand : public Command
+	{
+	public:
+		
+		void ExecuteCommand() override;
+
+
+		RendererContextI* r_ctx;
+	private:
+
+	};
+
+
+	class BufferClearCommand : public RendererCommand
+	{
+	public:
+		
+		void ExecuteCommand() override;
+	private:
+
+	};
+
+	
 
 	class Renderer
 	{
@@ -13,6 +40,9 @@ namespace moon {
 	private:
 
 		Mesh* _mesh;
+
+		RendererCommand* _command;
+
 	};
 
 }

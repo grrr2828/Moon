@@ -10,13 +10,13 @@ namespace moon {
 	public:
 
 
-		Test(const char* name)
-			: AppI(name)
+		Test()
+			: AppI()
 		{
 			
 		}
 
-		bool update() override
+		bool Update() override
 		{
 
 			return true;

@@ -170,6 +170,7 @@
     <ClCompile Include="Runtime\Thread\Private\Thread.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Runtime\Context.h" />
     <ClInclude Include="Runtime\Camera\Public\Camera.h" />
     <ClInclude Include="Runtime\Entry\Public\AppI.h" />
     <ClInclude Include="Math\Vector.h" />

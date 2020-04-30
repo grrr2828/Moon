@@ -1,8 +1,8 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 
+#include "AppI.h"
 #include "platform.h"
-#include "RendererProcessor.h"
 
 
 #if DEVICE_USE_GLFW
@@ -11,14 +11,18 @@ namespace moon {
 
 	struct Context
 	{
-		RendererProcessor* _rendererProcessor;
+
+		AppI* appI;
 
 		Context() {
-			_rendererProcessor = new RendererProcessor();
+			appI = new AppI();
 		};
 
 		~Context() {
-			delete _rendererProcessor;
+			if (appI) {
+				delete appI;
+				appI = nullptr;
+			}
 		}
 
 
@@ -29,15 +33,15 @@ namespace moon {
 		}
 
 
-		void gameLoop()
+		void update()
 		{
-			
+			appI->Update();
 		}
 
 
 		void renderFrame()
 		{
-			_rendererProcessor->Run();
+			appI->RenderFrame();
 		}
 
 
@@ -63,8 +67,8 @@ namespace moon {
 				// input
 				processInput(window);
 
-				// gameloop
-				gameLoop();
+				// loop
+				update();
 
 				// render
 				renderFrame();
