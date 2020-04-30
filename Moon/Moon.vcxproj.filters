@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{7f4cb67e-7386-42d7-8873-8fcfcd3d70a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime">
+      <UniqueIdentifier>{4c88f11b-ed77-477e-a74e-6f93aeff3d00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Test">
+      <UniqueIdentifier>{2d5d0b47-cefe-48f0-abb0-d32ae80f4a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Thread">
+      <UniqueIdentifier>{bf00e64e-6e02-4478-a1b6-57bf3687edbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Thread\Public">
+      <UniqueIdentifier>{dbff0661-dab2-4910-8389-72e398d3f7c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Thread\Private">
+      <UniqueIdentifier>{816f7d72-6fbe-45f6-9bf0-84c502c6434f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Renderer">
+      <UniqueIdentifier>{a865570c-bc8b-40d8-af79-b36e08a27c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Renderer\Public">
+      <UniqueIdentifier>{0048207b-a8a6-4578-ae16-05d64bd818fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Renderer\Private">
+      <UniqueIdentifier>{4722eba7-066c-4ecc-a088-d8240d5ce84a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Game">
+      <UniqueIdentifier>{223e1610-0975-44b8-8cc3-90d745b9e638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Game\Public">
+      <UniqueIdentifier>{fa549dd7-d60a-4fbb-87d5-bca7bfab2b87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Game\Private">
+      <UniqueIdentifier>{8cfc61c2-cc0f-4124-bdcb-6a1cb8a88a1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math">
+      <UniqueIdentifier>{57fd73f6-0365-470b-9b4b-6f8561643e7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Renderer\Private\Platform">
+      <UniqueIdentifier>{1f5c2d2f-4583-4ae2-860a-5c29a1c6c26c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Entry">
+      <UniqueIdentifier>{a1052ef2-a115-4d8c-adbb-ab6094ab4085}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Entry\Public">
+      <UniqueIdentifier>{95d98df3-d067-4401-bf77-9bc302e39247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Entry\Private">
+      <UniqueIdentifier>{2eb05615-98ae-4c16-b165-66206c848677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Camera">
+      <UniqueIdentifier>{30d8125b-bffe-41c2-8b5b-2c05190b5a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Camera\Public">
+      <UniqueIdentifier>{aafa8007-90ca-4732-b822-362b8a606f80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Runtime\Camera\Private">
+      <UniqueIdentifier>{8dc4b1df-2807-4ba1-af08-67aaf227db5a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Runtime\Renderer\Public\Mesh.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Public\Renderer.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Thread\Public\ITask.h">
+      <Filter>Engine\Runtime\Thread\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Thread\Public\Thread.h">
+      <Filter>Engine\Runtime\Thread\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\GraphicsEnums.h">
+      <Filter>Engine\Runtime\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Public\CommandBuffer.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Public\RendererContextI.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Config.h">
+      <Filter>Engine\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Private\Platform\RendererGL.h">
+      <Filter>Engine\Runtime\Renderer\Private\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Private\Platform\RendererD3D9.h">
+      <Filter>Engine\Runtime\Renderer\Private\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Public\RendererPipeline.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Entry\Public\AppI.h">
+      <Filter>Engine\Runtime\Entry\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\platform.h">
+      <Filter>Engine\Runtime</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Public\RendererProcessor.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Camera\Public\Camera.h">
+      <Filter>Engine\Runtime\Camera\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Moon.cpp">
+      <Filter>Engine\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Thread\Private\Task.cpp">
+      <Filter>Engine\Runtime\Thread\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Thread\Private\Thread.cpp">
+      <Filter>Engine\Runtime\Thread\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector.cpp">
+      <Filter>Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\Mesh.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\CommandBuffer.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\Renderer.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\Platform\RendererGL.cpp">
+      <Filter>Engine\Runtime\Renderer\Private\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\Platform\RendererD3D9.cpp">
+      <Filter>Engine\Runtime\Renderer\Private\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\RendererPipeline.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Entry\Private\AppI.cpp">
+      <Filter>Engine\Runtime\Entry\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Entry\Private\Device_windows.cpp">
+      <Filter>Engine\Runtime\Entry\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Entry\Private\Device_glfw.cpp">
+      <Filter>Engine\Runtime\Entry\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\RendererProcessor.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
