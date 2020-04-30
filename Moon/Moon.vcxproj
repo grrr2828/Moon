@@ -154,6 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Math\Color.cpp" />
     <ClCompile Include="Runtime\Entry\Private\AppI.cpp" />
     <ClCompile Include="Math\Vector.cpp" />
     <ClCompile Include="Moon.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Runtime\Thread\Private\Thread.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Runtime\Context.h" />
     <ClInclude Include="Runtime\Camera\Public\Camera.h" />
     <ClInclude Include="Runtime\Entry\Public\AppI.h" />

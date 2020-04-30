@@ -114,6 +114,9 @@
     <ClInclude Include="Runtime\Context.h">
       <Filter>Engine\Runtime</Filter>
     </ClInclude>
+    <ClInclude Include="Math\Color.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Moon.cpp">
@@ -157,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="Runtime\Renderer\Private\RendererProcessor.cpp">
       <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Color.cpp">
+      <Filter>Engine\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

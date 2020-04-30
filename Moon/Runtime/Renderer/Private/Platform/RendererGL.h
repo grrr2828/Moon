@@ -13,7 +13,7 @@ namespace moon {
 
 		RendererType GetRendererType() const override;
 
-		void BufferClear() override;
+		void BufferClear(const Color& color) override;
 	};
 
 }

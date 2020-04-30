@@ -25,6 +25,8 @@ namespace moon {
 	public:
 		
 		void ExecuteCommand() override;
+
+		Color color;
 	private:
 
 	};

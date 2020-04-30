@@ -14,7 +14,7 @@ namespace moon {
 	//BufferClearCommand
 	void BufferClearCommand::ExecuteCommand()
 	{
-		r_ctx->BufferClear();
+		r_ctx->BufferClear(color);
 	}
 
 

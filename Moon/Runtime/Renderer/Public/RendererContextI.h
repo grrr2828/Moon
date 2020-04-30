@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GraphicsEnums.h"
+#include "Color.h"
 
 namespace moon {
 
@@ -8,7 +9,7 @@ namespace moon {
 	{
 		virtual RendererType GetRendererType() const { return RendererType::Count; };
 
-		virtual void BufferClear() {};
+		virtual void BufferClear(const Color& color) {};
 	};
 
 }
