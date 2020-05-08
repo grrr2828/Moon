@@ -3,6 +3,17 @@
 namespace moon {
 
 	//RendererCommand
+	RendererCommand::RendererCommand()
+	{
+	
+	}
+
+	RendererCommand::~RendererCommand()
+	{
+		indices = nullptr;
+		vertices = nullptr;
+	}
+
 	void RendererCommand::ExecuteCommand()
 	{
 

@@ -4,8 +4,10 @@
 
 namespace moon {
 
-	struct RendererContextGL : public RendererContextI
+	class RendererContextGL : public RendererContextI
 	{
+
+	public:
 		
 		RendererContextGL();
 

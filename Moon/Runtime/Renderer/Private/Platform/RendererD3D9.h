@@ -4,8 +4,10 @@
 
 namespace moon {
 
-	struct RendererD3D9 : public RendererContextI
+	class RendererD3D9 : public RendererContextI
 	{
+	public:
+
 		RendererType GetRendererType() const override;
 	};
 

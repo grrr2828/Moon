@@ -1,8 +1,11 @@
 #pragma once
 
+#include <vector>
 #include "Color.h"
 
 namespace moon {
+
+	class RendererContextI;
 
 	class Command
 	{
@@ -25,7 +28,16 @@ namespace moon {
 	{
 	public:
 
+		RendererCommand();
+		~RendererCommand();
+
 		void ExecuteCommand() override;
+
+
+		RendererContextI* context = nullptr;
+
+		std::vector<int>* indices = nullptr;
+		std::vector<Vector>* vertices = nullptr;
 
 	};
 

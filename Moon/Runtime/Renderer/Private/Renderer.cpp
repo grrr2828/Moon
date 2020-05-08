@@ -30,7 +30,8 @@ namespace moon {
 
 	void Renderer::Draw(RendererContextI* context)
 	{
-
+		_command->context = context;
+		context->AddCommand(_command);
 	}
 
 }
