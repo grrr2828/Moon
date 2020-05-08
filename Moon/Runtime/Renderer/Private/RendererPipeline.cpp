@@ -25,6 +25,10 @@ namespace moon {
 		}
 
 		auto visibleRenderers = CullResults::visibleRenderers;
+		for (auto &renderer : visibleRenderers)
+		{
+			renderer->Draw( context );
+		}
 
 
 		context->Submit();

@@ -11,7 +11,6 @@ namespace moon {
 
 	void RendererContextI::AddCommand(RendererCommand* cmd)
 	{
-		//cmd->r_ctx = this;
 		renderQueue.push_back(cmd);
 	}
 
@@ -22,8 +21,8 @@ namespace moon {
 
 		for (int i = 0; i < size; i++)
 		{
-			//auto cmd = renderQueue[i];
-			//cmd->ExecuteCommand();
+			auto cmd = renderQueue[i];
+			cmd->ExecuteCommand();
 		}
 
 		renderQueue.clear();

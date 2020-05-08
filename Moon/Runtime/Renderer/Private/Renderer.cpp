@@ -28,7 +28,7 @@ namespace moon {
 	}
 
 
-	void Renderer::Draw()
+	void Renderer::Draw(RendererContextI* context)
 	{
 
 	}

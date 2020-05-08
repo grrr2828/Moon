@@ -5,13 +5,16 @@
 
 namespace moon {
 
+	class RendererContextI;
+	
+
 	class Renderer
 	{
 	public:
 		Renderer();
 		~Renderer();
 
-		void Draw();
+		void Draw(RendererContextI* context);
 	private:
 
 		Mesh* _mesh;

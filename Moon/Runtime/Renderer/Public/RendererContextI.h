@@ -8,8 +8,11 @@
 
 namespace moon {
 
-	struct RendererContextI
+	class RendererContextI
 	{
+
+	public:
+
 		virtual void Init() {};
 		
 		virtual RendererType GetRendererType() const { return RendererType::Count; };
