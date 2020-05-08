@@ -4,37 +4,33 @@
 namespace moon {
 
 
-	//RendererCommand
-	void RendererCommand::ExecuteCommand()
-	{
-	
-	}
-
-
-	//BufferClearCommand
-	void BufferClearCommand::ExecuteCommand()
-	{
-		r_ctx->BufferClear(color);
-	}
-
-
-
 	//Renderer
 	Renderer::Renderer()
 	{
-	
+		_command = new RendererCommand();
 	}
 
 	Renderer::~Renderer()
 	{
-		if ( _mesh ) {
-				
+		if (_mesh) {
+
 			delete _mesh;
 			_mesh = nullptr;
 
 		}
+
+		if (_command) {
+
+			delete _command;
+			_command = nullptr;
+
+		}
 	}
 
-	
+
+	void Renderer::Draw()
+	{
+
+	}
 
 }

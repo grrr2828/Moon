@@ -2,23 +2,10 @@
 
 #include <vector>
 
+#include "RendererContextI.h"
+
 namespace moon {
 
-	class Command
-	{
-
-	public:
-
-		enum CommandEnum
-		{
-			RendererInit,
-			RendererBufferClear,
-		};
-
-
-		virtual void ExecuteCommand() = 0;
-
-	};
 
 	class CommandBuffer
 	{
@@ -38,4 +25,6 @@ namespace moon {
 
 		std::vector<Command*> buffer;
 	};
+
+
 }

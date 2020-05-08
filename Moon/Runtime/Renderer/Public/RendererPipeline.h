@@ -3,32 +3,21 @@
 #include <vector>
 
 #include "Renderer.h"
-#include "CommandBuffer.h"
+#include "Camera.h"
+#include "RendererContextI.h"
 
 namespace moon {
 
 	class  RendererPipeline
 	{
 	public:
-		 RendererPipeline();
-		~ RendererPipeline();
+		RendererPipeline();
+		~RendererPipeline();
 
-		void AddRender(Renderer* render);
-		void RemoveRender(Renderer* render);
+		void Render(RendererContextI* context, std::vector<Camera*>& cameras);
 
-		void AddCommandPre(Command* cmd);
-		void AddCommandPost(Command* cmd);
-
-		void Render();
-
-		int depth;
 	private:
 
-		std::vector<Renderer*> _renderList;
-
-		CommandBuffer _cmdPre;
-		CommandBuffer _cmdSubmit;
-		CommandBuffer _cmdPost;
 
 	};
 

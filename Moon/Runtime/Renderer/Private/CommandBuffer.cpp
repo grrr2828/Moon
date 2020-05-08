@@ -4,7 +4,7 @@ namespace moon {
 
 	CommandBuffer::CommandBuffer()
 	{
-	
+
 	}
 
 	CommandBuffer::~CommandBuffer()
@@ -16,7 +16,7 @@ namespace moon {
 	{
 		int size = buffer.size();
 
-		for (size_t i = 0; i < size; i++)
+		for (int i = 0; i < size; i++)
 		{
 			auto cmd = buffer[i];
 			cmd->ExecuteCommand();
@@ -25,17 +25,17 @@ namespace moon {
 
 	void CommandBuffer::Add(Command* cmd)
 	{
-		buffer.push_back( cmd );
+		buffer.push_back(cmd);
 	}
 
 	void CommandBuffer::Clear()
 	{
 		int size = buffer.size();
 
-		for (size_t i = 0; i < size; i++)
+		for (int i = 0; i < size; i++)
 		{
 			auto cmd = buffer[i];
-			if ( cmd ) {
+			if (cmd) {
 				delete cmd;
 				cmd = nullptr;
 			}
@@ -44,5 +44,5 @@ namespace moon {
 		buffer.clear();
 
 	}
-	
+
 }

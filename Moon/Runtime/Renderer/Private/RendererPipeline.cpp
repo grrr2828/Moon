@@ -1,53 +1,33 @@
 #include "RendererPipeline.h"
+#include "CullResults.h"
 
 namespace moon {
 
-	
+
 	RendererPipeline::RendererPipeline()
 	{
-	
+
 	}
 
 	RendererPipeline::~RendererPipeline()
 	{
-		
+
 	}
 
-	void RendererPipeline::AddRender(Renderer* render)
+	void RendererPipeline::Render(RendererContextI* context, std::vector<Camera*>& cameras)
 	{
-		_renderList.push_back(render);
-	}
+		int size = cameras.size();
 
-	void RendererPipeline::RemoveRender(Renderer* render)
-	{
-		for (auto it = _renderList.begin(); it != _renderList.end(); it++) {
-			if (*it == render) {
-				it = _renderList.erase(it);
-				if (it == _renderList.end()) {
-					break;
-				}
-			}
+		for (int i = 0; i < size; i++)
+		{
+			auto camera = cameras[i];
+			CullResults::Cull(camera);
 		}
+
+		auto visibleRenderers = CullResults::visibleRenderers;
+
+
+		context->Submit();
 	}
 
-	void RendererPipeline::AddCommandPre(Command* cmd)
-	{
-		_cmdPre.Add( cmd );
-	}
-
-	void RendererPipeline::AddCommandPost(Command* cmd)
-	{
-		_cmdPost.Add( cmd );
-	}
-
-	void RendererPipeline::Render()
-	{
-
-		_cmdPre.Exce();
-
-
-
-		_cmdPost.Exce();
-	}
-	
 }

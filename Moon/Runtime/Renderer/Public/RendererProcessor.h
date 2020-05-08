@@ -2,6 +2,8 @@
 
 #include "RendererPipeline.h"
 #include "RendererContextI.h"
+#include "Camera.h"
+
 
 namespace moon {
 
@@ -11,13 +13,13 @@ namespace moon {
 		RendererProcessor();
 		~RendererProcessor();
 
-		void AddPipeline(RendererPipeline* pipeline);
-
 		void Run();
 
 		RendererContextI* r_ctx;
+
 	private:
-		
-		std::vector<RendererPipeline*> _pipelineList;
+
+		std::vector<Camera*> cameras;
+		RendererPipeline* currentPipeline;
 	};
 }
