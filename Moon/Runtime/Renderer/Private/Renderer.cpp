@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "Context.h"
+#include "RendererPipeline.h"
 
 namespace moon {
 
@@ -27,11 +28,16 @@ namespace moon {
 		}
 	}
 
+	void Renderer::SetMesh(Mesh* mesh)
+	{
+		_mesh = mesh;
+	}
+
 
 	void Renderer::Draw(RendererContextI* context)
 	{
-		//_command->context = context;
-		//_command->PrepareDraw();
+		_command->PrepareDraw(context, _mesh);
+		
 		context->AddCommand(_command);
 	}
 

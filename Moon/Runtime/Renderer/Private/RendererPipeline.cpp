@@ -14,6 +14,11 @@ namespace moon {
 
 	}
 
+	void RendererPipeline::DrawRenderers(std::vector<Renderer*>& renderers)
+	{
+
+	}
+
 	void RendererPipeline::Render(RendererContextI* context, std::vector<Camera*>& cameras)
 	{
 		int size = cameras.size();
@@ -27,7 +32,7 @@ namespace moon {
 		auto visibleRenderers = CullResults::visibleRenderers;
 		for (auto &renderer : visibleRenderers)
 		{
-			renderer->Draw( context );
+			renderer->Draw(context);
 		}
 
 

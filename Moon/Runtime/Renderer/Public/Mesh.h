@@ -11,10 +11,19 @@ namespace moon {
 		Mesh();
 		~Mesh();
 
-		void SetIndices(int indices[]);
+		void SetIndices(int indices[], int size);
 
-		void SetVertices(Vector vertices[]);
+		void SetVertices(Vector vertices[], int size);
 
+		std::vector<int> GetIndices()
+		{
+			return _indices;
+		}
+
+		std::vector<Vector> GetVertices()
+		{
+			return _vertices;
+		}
 	private:
 
 		std::vector<int> _indices;

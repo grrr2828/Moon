@@ -4,9 +4,10 @@
 
 #include "GraphicsEnums.h"
 #include "Color.h"
-#include "Renderer.h"
 
 namespace moon {
+
+	class RendererCommand;
 
 	class Buffer
 	{
@@ -14,8 +15,7 @@ namespace moon {
 		Buffer() {};
 		~Buffer() {};
 
-		void* indices = nullptr;
-		void* vertices = nullptr;
+		void* data = nullptr;
 	private:
 
 	};
@@ -31,19 +31,16 @@ namespace moon {
 
 		virtual void ClearTarget(const Color& color) {};
 
-		virtual void DrawRenderers(std::vector<Renderer*> &renderers);
-
-		virtual void Submit();
-
-		void AddCommand(RendererCommand* cmd);
-
 		virtual Buffer* CreateBuffer() { return nullptr; };
 		virtual void ReleaseBuffer(Buffer* buffer) {};
-	public:
+
+		virtual void Submit();
+		void AddCommand(RendererCommand* cmd);
+
+	private:
+
 		std::vector<RendererCommand*> renderQueue;
-
 		
-
 	};
 
 }

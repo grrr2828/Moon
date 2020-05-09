@@ -15,5 +15,6 @@ namespace moon {
 
 		static void Cull(Camera* camera);
 
+		static void AddRenderer(Renderer* renderer);
 	};
 }

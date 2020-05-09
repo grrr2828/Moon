@@ -16,8 +16,8 @@ namespace moon {
 
 		void Render(RendererContextI* context, std::vector<Camera*>& cameras);
 
-	private:
-
+		virtual void DrawRenderers(std::vector<Renderer*>& renderers);
+	
 
 	};
 

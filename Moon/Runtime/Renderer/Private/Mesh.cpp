@@ -10,11 +10,10 @@ namespace moon {
 
 	}
 
-	void Mesh::SetIndices(int indices[])
+	void Mesh::SetIndices(int indices[], int size)
 	{
 		_indices.clear();
 
-		int size = sizeof(indices) / sizeof(indices[0]);
 
 		for (int i = 0; i < size; i++)
 		{
@@ -22,11 +21,9 @@ namespace moon {
 		}
 	}
 
-	void Mesh::SetVertices(Vector vertices[])
+	void Mesh::SetVertices(Vector vertices[], int size)
 	{
 		_vertices.clear();
-
-		int size = sizeof(vertices) / sizeof(vertices[0]);
 
 		for (int i = 0; i < size; i++)
 		{

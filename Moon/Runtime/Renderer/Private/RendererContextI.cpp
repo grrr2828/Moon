@@ -1,19 +1,12 @@
 #include "RendererContextI.h"
+#include "Command.h"
 
 namespace moon {
-
-
-	void RendererContextI::DrawRenderers(std::vector<Renderer*>& renderers)
-	{
-
-	}
-
 
 	void RendererContextI::AddCommand(RendererCommand* cmd)
 	{
 		renderQueue.push_back(cmd);
 	}
-
 
 	void RendererContextI::Submit()
 	{

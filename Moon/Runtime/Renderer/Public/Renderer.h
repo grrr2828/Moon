@@ -5,7 +5,6 @@
 
 namespace moon {
 	
-
 	class Renderer
 	{
 	public:
@@ -13,6 +12,8 @@ namespace moon {
 		~Renderer();
 
 		void Draw(RendererContextI* context);
+
+		void SetMesh(Mesh* mesh);
 	private:
 
 		Mesh* _mesh;

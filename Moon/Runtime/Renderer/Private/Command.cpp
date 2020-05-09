@@ -1,4 +1,5 @@
 #include "Command.h"
+#include "Mesh.h"
 
 namespace moon {
 
@@ -10,14 +11,28 @@ namespace moon {
 
 	RendererCommand::~RendererCommand()
 	{
-		indices = nullptr;
-		vertices = nullptr;
+		if (indicesBuffer) {
+			delete indicesBuffer;
+			indicesBuffer = nullptr;
+		}
+
+		if (verticesBuffer) {
+			delete verticesBuffer;
+			verticesBuffer = nullptr;
+		}
 	}
 
 	void RendererCommand::PrepareDraw(RendererContextI* context, Mesh* mesh)
 	{
-		if(indices == nullptr) {
-			
+		if(indicesBuffer == nullptr ) {
+			indicesBuffer = context->CreateBuffer();
+
+			auto indices = mesh->GetIndices();
+			indicesBuffer->data = &indices;
+		}
+
+		if (verticesBuffer == nullptr ) {
+			verticesBuffer = context->CreateBuffer();
 		}
 	}
 
@@ -25,6 +40,10 @@ namespace moon {
 	{
 
 	}
+
+
+
+
 
 
 	//BufferClearCommand

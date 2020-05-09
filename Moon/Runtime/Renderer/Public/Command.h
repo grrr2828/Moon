@@ -1,12 +1,12 @@
 #pragma once
 
 #include <vector>
-#include "Color.h"
 
+#include "RendererContextI.h"
+#include "Color.h"
 
 namespace moon {
 
-	class RendererContextI;
 	class Buffer;
 	class Mesh;
 
@@ -38,8 +38,8 @@ namespace moon {
 
 		void ExecuteCommand() override;
 
-		Buffer* indices = nullptr;
-		Buffer* vertices = nullptr;
+		Buffer* indicesBuffer = nullptr;
+		Buffer* verticesBuffer = nullptr;
 
 	};
 
