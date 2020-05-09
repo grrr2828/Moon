@@ -52,14 +52,11 @@
     <Filter Include="Engine\Runtime\Entry\Private">
       <UniqueIdentifier>{2eb05615-98ae-4c16-b165-66206c848677}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Runtime\Camera">
-      <UniqueIdentifier>{30d8125b-bffe-41c2-8b5b-2c05190b5a55}</UniqueIdentifier>
+    <Filter Include="Engine\3rdParty">
+      <UniqueIdentifier>{1e383844-c0b5-41d5-966c-12df01de4f4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Runtime\Camera\Public">
-      <UniqueIdentifier>{aafa8007-90ca-4732-b822-362b8a606f80}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Runtime\Camera\Private">
-      <UniqueIdentifier>{8dc4b1df-2807-4ba1-af08-67aaf227db5a}</UniqueIdentifier>
+    <Filter Include="Engine\3rdParty\glad">
+      <UniqueIdentifier>{89d91616-f478-44cd-9928-b1cb529a2d4e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -108,14 +105,29 @@
     <ClInclude Include="Runtime\Renderer\Public\RendererProcessor.h">
       <Filter>Engine\Runtime\Renderer\Public</Filter>
     </ClInclude>
-    <ClInclude Include="Runtime\Camera\Public\Camera.h">
-      <Filter>Engine\Runtime\Camera\Public</Filter>
-    </ClInclude>
     <ClInclude Include="Runtime\Context.h">
       <Filter>Engine\Runtime</Filter>
     </ClInclude>
     <ClInclude Include="Math\Color.h">
       <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Public\Shader.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Public\Camera.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Public\CullResults.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Runtime\Renderer\Public\Command.h">
+      <Filter>Engine\Runtime\Renderer\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\glad\include\glad\glad.h">
+      <Filter>Engine\3rdParty\glad</Filter>
+    </ClInclude>
+    <ClInclude Include="3rdParty\glad\include\KHR\khrplatform.h">
+      <Filter>Engine\3rdParty\glad</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +175,24 @@
     </ClCompile>
     <ClCompile Include="Math\Color.cpp">
       <Filter>Engine\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\Shader.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\Camera.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\CullResults.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\RendererContextI.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\Command.cpp">
+      <Filter>Engine\Runtime\Renderer\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="3rdParty\glad\src\glad.c">
+      <Filter>Engine\3rdParty\glad</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -8,6 +8,18 @@
 
 namespace moon {
 
+	class Buffer
+	{
+	public:
+		Buffer() {};
+		~Buffer() {};
+
+		void* indices = nullptr;
+		void* vertices = nullptr;
+	private:
+
+	};
+
 	class RendererContextI
 	{
 
@@ -17,7 +29,7 @@ namespace moon {
 		
 		virtual RendererType GetRendererType() const { return RendererType::Count; };
 
-		virtual void BufferClear(const Color& color) {};
+		virtual void ClearTarget(const Color& color) {};
 
 		virtual void DrawRenderers(std::vector<Renderer*> &renderers);
 
@@ -25,7 +37,13 @@ namespace moon {
 
 		void AddCommand(RendererCommand* cmd);
 
+		virtual Buffer* CreateBuffer() { return nullptr; };
+		virtual void ReleaseBuffer(Buffer* buffer) {};
+	public:
 		std::vector<RendererCommand*> renderQueue;
+
+		
+
 	};
 
 }

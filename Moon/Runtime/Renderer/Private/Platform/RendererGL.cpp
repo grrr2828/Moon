@@ -1,7 +1,22 @@
 #include "RendererGL.h"
-#include <GLFW/glfw3.h>
 
 namespace moon {
+
+
+	BufferGL::BufferGL()
+	{
+		glBindBuffer(1, _buffer);
+	}
+
+	BufferGL::~BufferGL()
+	{
+		if (_buffer)
+			glDeleteBuffers(1, &_buffer);
+	}
+
+
+
+
 
 	RendererContextGL::RendererContextGL()
 	{
@@ -13,7 +28,7 @@ namespace moon {
 	
 	}
 
-	void RendererContextGL::BufferClear(const Color& color)
+	void RendererContextGL::ClearTarget(const Color& color)
 	{
 		float r = (float)color.r() / 255;
 		float g = (float)color.g() / 255;
@@ -22,6 +37,19 @@ namespace moon {
 
 		glClearColor( r, g, b, a );
 		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
+	Buffer* RendererContextGL::CreateBuffer()
+	{
+		return new BufferGL();
+	}
+
+	void RendererContextGL::ReleaseBuffer(Buffer* buffer)
+	{
+		if (buffer) {
+			delete buffer;
+			buffer = nullptr;
+		}
 	}
 
 	RendererType RendererContextGL::GetRendererType() const

@@ -4,8 +4,6 @@
 #include "Command.h"
 
 namespace moon {
-
-	class RendererContextI;
 	
 
 	class Renderer

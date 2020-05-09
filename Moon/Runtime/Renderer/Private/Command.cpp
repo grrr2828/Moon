@@ -14,6 +14,13 @@ namespace moon {
 		vertices = nullptr;
 	}
 
+	void RendererCommand::PrepareDraw(RendererContextI* context, Mesh* mesh)
+	{
+		if(indices == nullptr) {
+			
+		}
+	}
+
 	void RendererCommand::ExecuteCommand()
 	{
 

@@ -6,7 +6,7 @@
 
 namespace moon {
 
-
+	
 	class CommandBuffer
 	{
 	public:
@@ -26,5 +26,5 @@ namespace moon {
 		std::vector<Command*> buffer;
 	};
 
-
+	
 }

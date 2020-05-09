@@ -3,9 +3,12 @@
 #include <vector>
 #include "Color.h"
 
+
 namespace moon {
 
 	class RendererContextI;
+	class Buffer;
+	class Mesh;
 
 	class Command
 	{
@@ -31,13 +34,12 @@ namespace moon {
 		RendererCommand();
 		~RendererCommand();
 
+		void PrepareDraw(RendererContextI* context, Mesh* mesh);
+
 		void ExecuteCommand() override;
 
-
-		RendererContextI* context = nullptr;
-
-		std::vector<int>* indices = nullptr;
-		std::vector<Vector>* vertices = nullptr;
+		Buffer* indices = nullptr;
+		Buffer* vertices = nullptr;
 
 	};
 

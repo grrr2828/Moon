@@ -16,7 +16,7 @@ namespace moon {
 
 		int size = sizeof(indices) / sizeof(indices[0]);
 
-		for (size_t i = 0; i < size; i++)
+		for (int i = 0; i < size; i++)
 		{
 			_indices.push_back(indices[i]);
 		}
@@ -28,7 +28,7 @@ namespace moon {
 
 		int size = sizeof(vertices) / sizeof(vertices[0]);
 
-		for (size_t i = 0; i < size; i++)
+		for (int i = 0; i < size; i++)
 		{
 			_vertices.push_back(vertices[i]);
 		}
