@@ -12,23 +12,16 @@ namespace moon {
 
 	void Mesh::SetIndices(int indices[], int size)
 	{
-		_indices.clear();
+		_indices = indices;
 
-
-		for (int i = 0; i < size; i++)
-		{
-			_indices.push_back(indices[i]);
-		}
+		indicesSize = size;
 	}
 
-	void Mesh::SetVertices(Vector vertices[], int size)
+	void Mesh::SetVertices(float vertices[], int size)
 	{
-		_vertices.clear();
+		_vertices = vertices;
 
-		for (int i = 0; i < size; i++)
-		{
-			_vertices.push_back(vertices[i]);
-		}
+		verticesSize = size;
 	}
 
 

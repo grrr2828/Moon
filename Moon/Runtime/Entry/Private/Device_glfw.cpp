@@ -1,4 +1,6 @@
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include <iostream>
 
 #include "AppI.h"
@@ -52,6 +54,7 @@ namespace moon {
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+
 			GLFWwindow* window = glfwCreateWindow(DEVICE_DEFAULT_WIDTH, DEVICE_DEFAULT_HEIGHT, "Moon", NULL, NULL);
 			if (window == NULL)
 			{
@@ -60,7 +63,16 @@ namespace moon {
 				return -1;
 			}
 
+			
+
 			glfwMakeContextCurrent(window);
+
+			if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+				std::cout << "Failed to initialize GLAD" << std::endl;
+				return -1;
+			}
+
+			
 
 			while (!glfwWindowShouldClose(window))
 			{

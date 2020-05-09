@@ -52,12 +52,6 @@
     <Filter Include="Engine\Runtime\Entry\Private">
       <UniqueIdentifier>{2eb05615-98ae-4c16-b165-66206c848677}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\3rdParty">
-      <UniqueIdentifier>{1e383844-c0b5-41d5-966c-12df01de4f4d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\3rdParty\glad">
-      <UniqueIdentifier>{89d91616-f478-44cd-9928-b1cb529a2d4e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Runtime\Renderer\Public\Mesh.h">
@@ -123,12 +117,8 @@
     <ClInclude Include="Runtime\Renderer\Public\Command.h">
       <Filter>Engine\Runtime\Renderer\Public</Filter>
     </ClInclude>
-    <ClInclude Include="3rdParty\glad\include\glad\glad.h">
-      <Filter>Engine\3rdParty\glad</Filter>
-    </ClInclude>
-    <ClInclude Include="3rdParty\glad\include\KHR\khrplatform.h">
-      <Filter>Engine\3rdParty\glad</Filter>
-    </ClInclude>
+    <ClInclude Include="3rdParty\glad\include\glad\glad.h" />
+    <ClInclude Include="3rdParty\glad\include\KHR\khrplatform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Moon.cpp">
@@ -191,8 +181,6 @@
     <ClCompile Include="Runtime\Renderer\Private\Command.cpp">
       <Filter>Engine\Runtime\Renderer\Private</Filter>
     </ClCompile>
-    <ClCompile Include="3rdParty\glad\src\glad.c">
-      <Filter>Engine\3rdParty\glad</Filter>
-    </ClCompile>
+    <ClCompile Include="3rdParty\glad\src\glad.c" />
   </ItemGroup>
 </Project>

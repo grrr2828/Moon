@@ -14,8 +14,8 @@ namespace moon {
 	public:
 		Buffer() {};
 		~Buffer() {};
-
-		void* data = nullptr;
+		
+		virtual void UpdateData(void* data, std::size_t size) {};
 	private:
 
 	};

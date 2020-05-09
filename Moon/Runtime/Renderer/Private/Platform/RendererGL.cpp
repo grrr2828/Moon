@@ -5,7 +5,7 @@ namespace moon {
 
 	BufferGL::BufferGL()
 	{
-		glBindBuffer(1, _buffer);
+		glGenBuffers(1, &_buffer);
 	}
 
 	BufferGL::~BufferGL()
@@ -15,8 +15,11 @@ namespace moon {
 	}
 
 
-
-
+	void BufferGL::UpdateData(void* data, std::size_t size)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, _buffer);
+		glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+	}
 
 	RendererContextGL::RendererContextGL()
 	{
@@ -35,8 +38,8 @@ namespace moon {
 		float b = (float)color.b() / 255;
 		float a = (float)color.a() / 255;
 
-		glClearColor( r, g, b, a );
-		glClear(GL_COLOR_BUFFER_BIT);
+		//glClearColor( r, g, b, a );
+		//glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	Buffer* RendererContextGL::CreateBuffer()

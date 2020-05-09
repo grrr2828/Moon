@@ -93,12 +93,12 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalIncludeDirectories>E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glad\include;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Entry\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer\Private\Platform;E:\Users\Administrator\source\repos\Moon\Moon\Runtime;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer;E:\Users\Administrator\source\repos\Moon\Moon\Math;E:\Users\Administrator\source\repos\Moon\Moon\Game\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Thread\Public;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glfw-3.3.2.bin.WIN32\include;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Entry\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer\Private\Platform;E:\Users\Administrator\source\repos\Moon\Moon\Runtime;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer;E:\Users\Administrator\source\repos\Moon\Moon\Math;E:\Users\Administrator\source\repos\Moon\Moon\Game\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Thread\Public;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glfw-3.3.2.bin.WIN32\include;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glew-2.1.0\include;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glad\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glfw-3.3.2.bin.WIN32\lib-vc2019;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glad\lib;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glfw-3.3.2.bin.WIN32\lib-vc2019;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glew-2.1.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>MSVCRT.lib;LIBCMT.lib</IgnoreSpecificDefaultLibraries>
     </Link>

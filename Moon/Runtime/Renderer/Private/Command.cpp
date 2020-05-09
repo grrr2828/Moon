@@ -28,11 +28,15 @@ namespace moon {
 			indicesBuffer = context->CreateBuffer();
 
 			auto indices = mesh->GetIndices();
-			indicesBuffer->data = &indices;
+			indicesBuffer->UpdateData(indices, mesh->indicesSize);
 		}
 
 		if (verticesBuffer == nullptr ) {
 			verticesBuffer = context->CreateBuffer();
+
+			auto verts = mesh->GetVertices();
+			verticesBuffer->UpdateData(verts, mesh->verticesSize);
+
 		}
 	}
 

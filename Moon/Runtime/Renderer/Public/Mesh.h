@@ -5,6 +5,8 @@
 
 namespace moon {
 
+	
+
 	class Mesh
 	{
 	public:
@@ -12,23 +14,24 @@ namespace moon {
 		~Mesh();
 
 		void SetIndices(int indices[], int size);
+		void SetVertices(float vertices[], int size);
 
-		void SetVertices(Vector vertices[], int size);
-
-		std::vector<int> GetIndices()
+		int* GetIndices()
 		{
 			return _indices;
 		}
 
-		std::vector<Vector> GetVertices()
+		float* GetVertices()
 		{
 			return _vertices;
 		}
+
+		int indicesSize;
+		int verticesSize;
 	private:
 
-		std::vector<int> _indices;
-		std::vector<Vector> _vertices;
-
+		int* _indices;
+		float* _vertices;
 	};
 
 }

@@ -14,10 +14,13 @@ namespace moon {
 		BufferGL();
 		~BufferGL();
 
-
+		void UpdateData(void* data, std::size_t size) override;
+	
 	private:
 
 		GLuint _buffer = 0;
+		std::size_t _bufferAllocated = 0;
+		char* _data = nullptr;
 	};
 
 	class RendererContextGL : public RendererContextI
