@@ -22,32 +22,33 @@ namespace moon {
 		}
 	}
 
-	void RendererCommand::PrepareDraw(RendererContextI* context, Mesh* mesh)
+	void RendererCommand::PrepareDraw(RendererContextI* context, Mesh* mesh, Shader* shader)
 	{
-		if(indicesBuffer == nullptr ) {
-			indicesBuffer = context->CreateBuffer();
+		_context = context;
+
+		/*if(indicesBuffer == nullptr ) {
+			indicesBuffer = _context->CreateBuffer();
 
 			auto indices = mesh->GetIndices();
 			indicesBuffer->UpdateData(indices, mesh->indicesSize);
-		}
+		}*/
 
 		if (verticesBuffer == nullptr ) {
-			verticesBuffer = context->CreateBuffer();
+			verticesBuffer = _context->CreateBuffer();
 
-			auto verts = mesh->GetVertices();
+			float* verts = mesh->GetVertices();
 			verticesBuffer->UpdateData(verts, mesh->verticesSize);
-
 		}
+
+		
+
+		_shader = shader;
 	}
 
 	void RendererCommand::ExecuteCommand()
 	{
-
+		_context->Draw(verticesBuffer, indicesBuffer, _shader);
 	}
-
-
-
-
 
 
 	//BufferClearCommand

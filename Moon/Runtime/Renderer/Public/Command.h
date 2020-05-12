@@ -34,12 +34,18 @@ namespace moon {
 		RendererCommand();
 		~RendererCommand();
 
-		void PrepareDraw(RendererContextI* context, Mesh* mesh);
+		void PrepareDraw(RendererContextI* context, Mesh* mesh, Shader* shader);
 
 		void ExecuteCommand() override;
 
 		Buffer* indicesBuffer = nullptr;
 		Buffer* verticesBuffer = nullptr;
+
+		Shader* _shader = nullptr;
+
+	private:
+
+		RendererContextI* _context;
 
 	};
 

@@ -14,9 +14,13 @@ namespace moon {
 		void Draw(RendererContextI* context);
 
 		void SetMesh(Mesh* mesh);
+
+		void SetShader( Shader* shader );
 	private:
 
 		Mesh* _mesh;
+
+		Shader* _shader;
 
 		RendererCommand* _command;
 

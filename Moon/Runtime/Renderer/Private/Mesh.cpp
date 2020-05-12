@@ -10,17 +10,18 @@ namespace moon {
 
 	}
 
-	void Mesh::SetIndices(int indices[], int size)
+	void Mesh::SetIndices(int* indices, int size)
 	{
+		
 		_indices = indices;
 
 		indicesSize = size;
 	}
 
-	void Mesh::SetVertices(float vertices[], int size)
+	void Mesh::SetVertices(float* vertices, int size)
 	{
+		
 		_vertices = vertices;
-
 		verticesSize = size;
 	}
 

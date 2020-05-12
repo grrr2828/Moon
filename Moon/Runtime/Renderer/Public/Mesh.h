@@ -13,8 +13,8 @@ namespace moon {
 		Mesh();
 		~Mesh();
 
-		void SetIndices(int indices[], int size);
-		void SetVertices(float vertices[], int size);
+		void SetIndices(int* indices, int size);
+		void SetVertices(float* vertices, int size);
 
 		int* GetIndices()
 		{
@@ -30,8 +30,9 @@ namespace moon {
 		int verticesSize;
 	private:
 
-		int* _indices;
-		float* _vertices;
+		int* _indices = nullptr;
+		float* _vertices = nullptr;
+		Color* colors = nullptr;
 	};
 
 }

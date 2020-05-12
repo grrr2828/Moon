@@ -8,17 +8,22 @@
 namespace moon {
 
 	class RendererCommand;
+	class Shader;
 
 	class Buffer
 	{
 	public:
 		Buffer() {};
 		~Buffer() {};
+
+		virtual void Refresh() {};
 		
 		virtual void UpdateData(void* data, std::size_t size) {};
 	private:
 
 	};
+
+	
 
 	class RendererContextI
 	{
@@ -32,7 +37,10 @@ namespace moon {
 		virtual void ClearTarget(const Color& color) {};
 
 		virtual Buffer* CreateBuffer() { return nullptr; };
-		virtual void ReleaseBuffer(Buffer* buffer) {};
+
+		virtual Shader* CreateShader() { return nullptr; };
+
+		virtual void Draw(Buffer* verts, Buffer* indices, Shader* shader) {};
 
 		virtual void Submit();
 		void AddCommand(RendererCommand* cmd);

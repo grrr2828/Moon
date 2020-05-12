@@ -1,11 +1,14 @@
 #pragma once
 
-#include "RendererContextI.h"
 #include <glad/glad.h>
 
 
+#include "RendererContextI.h"
+#include "Shader.h"
+
 namespace moon {
 
+	//BufferGL
 	class BufferGL : public Buffer
 	{
 
@@ -14,15 +17,37 @@ namespace moon {
 		BufferGL();
 		~BufferGL();
 
+		void Refresh() override;
+
 		void UpdateData(void* data, std::size_t size) override;
-	
+
 	private:
 
-		GLuint _buffer = 0;
-		std::size_t _bufferAllocated = 0;
-		char* _data = nullptr;
+		GLuint buffer = 0;
+		GLuint vao;
 	};
 
+
+	//ShaderGL
+	class ShaderGL : public Shader
+	{
+
+	public:
+		
+		ShaderGL();
+		~ShaderGL();
+	
+		void CompileShader(const std::string& vertexShaderSource, const std::string& sourfragmentShaderSourcece) override;
+
+		void Use() override;
+	private:
+
+		GLuint CreateShader(GLenum type, const std::string& source);
+		GLuint shaderProgram = 0;
+	};
+
+
+	//RendererContextGL
 	class RendererContextGL : public RendererContextI
 	{
 
@@ -38,7 +63,9 @@ namespace moon {
 
 		Buffer* CreateBuffer() override;
 
-		void ReleaseBuffer(Buffer* buffer) override;
+		Shader* CreateShader() override;
+
+		void Draw(Buffer* verts, Buffer* indices, Shader* shader) override;
 	};
 
 }
