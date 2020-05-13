@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Vector.h"
+#include "Color.h"
 
 namespace moon {
 
