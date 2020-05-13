@@ -12,9 +12,10 @@ namespace moon {
 	
 	}
 
-	void Shader::CompileShader(const std::string& vertexShaderSource, const std::string& fragmentShaderSourcece)
+	void Shader::CompileShader(const char* vertexShaderSource, const char* fragmentShaderSourcece)
 	{
-	
+		_vertexShaderSource = vertexShaderSource;
+		_fragmentShaderSource = fragmentShaderSourcece;
 	}
 
 }

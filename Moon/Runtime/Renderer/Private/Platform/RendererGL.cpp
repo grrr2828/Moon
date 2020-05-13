@@ -1,9 +1,10 @@
 #include "RendererGL.h"
+#include "Mesh.h"
 
 namespace moon {
 
 
-	BufferGL::BufferGL()
+	/*BufferGL::BufferGL()
 	{
 		glGenBuffers(1, &buffer);
 		glGenVertexArrays(1, &vao);
@@ -34,7 +35,7 @@ namespace moon {
 		glEnableVertexAttribArray(0);
 
 		glBindVertexArray(0);
-	}
+	}*/
 
 
 	ShaderGL::ShaderGL()
@@ -50,8 +51,10 @@ namespace moon {
 		}
 	}
 
-	void ShaderGL::CompileShader(const std::string& vertexShaderSource, const std::string& fragmentShaderSourcece)
+	void ShaderGL::CompileShader(const char* vertexShaderSource, const char* fragmentShaderSourcece)
 	{
+		Shader::CompileShader(vertexShaderSource, fragmentShaderSourcece);
+
 		int vertShader = CreateShader(GL_VERTEX_SHADER, vertexShaderSource);
 		int fragShader = CreateShader(GL_FRAGMENT_SHADER, fragmentShaderSourcece);
 
@@ -71,11 +74,11 @@ namespace moon {
 		glDeleteShader(fragShader);
 	}
 
-	GLuint ShaderGL::CreateShader(GLenum type, const std::string& source)
+	GLuint ShaderGL::CreateShader(GLenum type, const char* source)
 	{
 		GLuint shader = glCreateShader(type);
 
-		const GLchar* sourceGL = reinterpret_cast<const GLchar*>(source.c_str());
+		const GLchar* sourceGL = reinterpret_cast<const GLchar*>(source);
 
 		glShaderSource(shader, 1, &sourceGL, NULL);
 		glCompileShader(shader);
@@ -118,14 +121,14 @@ namespace moon {
 		//glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	Buffer* RendererContextGL::CreateBuffer()
-	{
-		return new BufferGL();
-	}
-
 	Shader* RendererContextGL::CreateShader()
 	{
 		return new ShaderGL();
+	}
+
+	RendererCommand* RendererContextGL::CreateRendererCommand()
+	{
+		return new RendererCommandGL();
 	}
 
 	RendererType RendererContextGL::GetRendererType() const
@@ -133,13 +136,48 @@ namespace moon {
 		return RendererType::OpenGL;
 	}
 
-	void RendererContextGL::Draw(Buffer* verts, Buffer* indices, Shader* shader)
+
+	RendererCommandGL::RendererCommandGL()
+	{
+
+	}
+
+
+	RendererCommandGL::~RendererCommandGL()
+	{
+		if (verticesBuffer)
+			glDeleteBuffers(1, &verticesBuffer);
+
+
+
+	}
+
+	void RendererCommandGL::Init(Mesh* mesh, Shader* shader)
+	{
+		RendererCommand::Init(mesh, shader);
+
+		glGenBuffers(1, &verticesBuffer);
+		glGenVertexArrays(1, &vao);
+		
+		glBindVertexArray(vao);
+
+		glBindBuffer(GL_ARRAY_BUFFER, verticesBuffer);
+		glBufferData(GL_ARRAY_BUFFER, mesh->verticesSize, mesh->GetVertices(), GL_STATIC_DRAW);
+
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(0);
+
+		glBindVertexArray(0);
+
+	}
+
+	void RendererCommandGL::ExecuteCommand()
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		verts->Refresh();
-		shader->Use();
+		glBindVertexArray(vao);
+		_shader->Use();
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 	}

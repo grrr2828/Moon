@@ -18,11 +18,11 @@ namespace moon {
 		void SetShader( Shader* shader );
 	private:
 
-		Mesh* _mesh;
+		Mesh* _mesh = nullptr;
 
-		Shader* _shader;
+		Shader* _shader = nullptr;
 
-		RendererCommand* _command;
+		RendererCommand* _command = nullptr;
 
 	};
 

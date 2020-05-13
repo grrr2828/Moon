@@ -31,7 +31,7 @@ namespace moon {
 
 
 
-		CullResults::Cull(nullptr);
+		CullResults::Cull(context, nullptr);
 
 		auto visibleRenderers = CullResults::visibleRenderers;
 		for (auto &renderer : visibleRenderers)

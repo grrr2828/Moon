@@ -33,7 +33,8 @@ namespace moon {
 
 		int* _indices = nullptr;
 		float* _vertices = nullptr;
-		Color* colors = nullptr;
+		float* uv = nullptr;
+		Color* iColors = nullptr;
 	};
 
 }

@@ -11,7 +11,7 @@ namespace moon {
 		Shader();
 		~Shader();
 
-		virtual void CompileShader(const std::string& vertexShaderSource, const std::string& sourfragmentShaderSourcece);
+		virtual void CompileShader(const char* vertexShaderSource, const char* sourfragmentShaderSourcece);
 
 		virtual void Use() {};
 	private:

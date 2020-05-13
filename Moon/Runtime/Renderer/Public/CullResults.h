@@ -13,7 +13,7 @@ namespace moon {
 	public:
 		static std::vector<Renderer*> visibleRenderers;
 
-		static void Cull(Camera* camera);
+		static void Cull(RendererContextI* context, Camera* camera);
 
 	};
 }

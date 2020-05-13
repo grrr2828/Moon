@@ -5,28 +5,11 @@
 
 #include "RendererContextI.h"
 #include "Shader.h"
+#include "Command.h"
 
 namespace moon {
 
-	//BufferGL
-	class BufferGL : public Buffer
-	{
-
-	public:
-
-		BufferGL();
-		~BufferGL();
-
-		void Refresh() override;
-
-		void UpdateData(void* data, std::size_t size) override;
-
-	private:
-
-		GLuint buffer = 0;
-		GLuint vao;
-	};
-
+	
 
 	//ShaderGL
 	class ShaderGL : public Shader
@@ -37,12 +20,12 @@ namespace moon {
 		ShaderGL();
 		~ShaderGL();
 	
-		void CompileShader(const std::string& vertexShaderSource, const std::string& sourfragmentShaderSourcece) override;
+		void CompileShader(const char* vertexShaderSource, const char* sourfragmentShaderSourcece) override;
 
 		void Use() override;
 	private:
 
-		GLuint CreateShader(GLenum type, const std::string& source);
+		GLuint CreateShader(GLenum type, const char* source);
 		GLuint shaderProgram = 0;
 	};
 
@@ -61,11 +44,29 @@ namespace moon {
 
 		void ClearTarget(const Color& color) override;
 
-		Buffer* CreateBuffer() override;
-
 		Shader* CreateShader() override;
 
-		void Draw(Buffer* verts, Buffer* indices, Shader* shader) override;
+		RendererCommand* CreateRendererCommand() override;
+
+	};
+
+	class RendererCommandGL : public RendererCommand
+	{
+
+	public:
+
+		RendererCommandGL();
+		~RendererCommandGL();
+
+		void Init(Mesh* mesh, Shader* shader) override;
+
+		void ExecuteCommand() override;
+
+	private:
+
+		GLuint verticesBuffer = 0;
+		GLuint indicesBuffer = 0;
+		GLuint vao = 0;
 	};
 
 }
