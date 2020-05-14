@@ -16,6 +16,7 @@ namespace moon {
 
 		void SetIndices(int* indices, int size);
 		void SetVertices(float* vertices, int size);
+		void SetColors(Color* colors, int size);
 
 		int* GetIndices()
 		{
@@ -27,14 +28,22 @@ namespace moon {
 			return _vertices;
 		}
 
+		Color* GetColors()
+		{
+			return _iColors;
+		}
+
 		int indicesSize;
 		int verticesSize;
+		int colorsSize;
+
+		int vectCount;
 	private:
 
 		int* _indices = nullptr;
 		float* _vertices = nullptr;
 		float* uv = nullptr;
-		Color* iColors = nullptr;
+		Color* _iColors = nullptr;
 	};
 
 }

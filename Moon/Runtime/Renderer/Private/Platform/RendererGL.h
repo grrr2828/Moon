@@ -67,6 +67,9 @@ namespace moon {
 		GLuint verticesBuffer = 0;
 		GLuint indicesBuffer = 0;
 		GLuint vao = 0;
+		int drawVertCount = 0;
+
+		float* finalVertices = nullptr;
 	};
 
 }

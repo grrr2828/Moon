@@ -4,40 +4,6 @@
 namespace moon {
 
 
-	/*BufferGL::BufferGL()
-	{
-		glGenBuffers(1, &buffer);
-		glGenVertexArrays(1, &vao);
-	}
-
-	BufferGL::~BufferGL()
-	{
-		if (buffer)
-			glDeleteBuffers(1, &buffer);
-	}
-
-
-	void BufferGL::Refresh()
-	{
-		glBindVertexArray(vao);
-	}
-
-
-	void BufferGL::UpdateData(void* data, std::size_t size)
-	{
-
-		glBindVertexArray(vao);
-
-		glBindBuffer(GL_ARRAY_BUFFER, buffer);
-		glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
-
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-
-		glBindVertexArray(0);
-	}*/
-
-
 	ShaderGL::ShaderGL()
 	{
 	
@@ -148,7 +114,9 @@ namespace moon {
 		if (verticesBuffer)
 			glDeleteBuffers(1, &verticesBuffer);
 
-
+		if (finalVertices) {
+			delete[] finalVertices;
+		}
 
 	}
 
@@ -157,16 +125,71 @@ namespace moon {
 		RendererCommand::Init(mesh, shader);
 
 		glGenBuffers(1, &verticesBuffer);
+		glGenBuffers(1, &indicesBuffer);
+
 		glGenVertexArrays(1, &vao);
 		
 		glBindVertexArray(vao);
 
-		glBindBuffer(GL_ARRAY_BUFFER, verticesBuffer);
-		glBufferData(GL_ARRAY_BUFFER, mesh->verticesSize, mesh->GetVertices(), GL_STATIC_DRAW);
+		auto iColors = mesh->GetColors();
+		int colorLen = mesh->colorsSize / sizeof(iColors[0]);
+		int verticesLen = mesh->verticesSize / sizeof(mesh->GetVertices()[0]);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		int len = verticesLen + colorLen * 3;
+		finalVertices = new float[len];
+
+		int colorIndex = 3;
+		for (int i = 0; i < colorLen; i++)
+		{
+			auto c = iColors[i];
+			finalVertices[colorIndex] = c.r() / 255;
+			finalVertices[colorIndex + 1] = c.g() / 255;
+			finalVertices[colorIndex + 2] = c.b() / 255;
+
+			colorIndex += 6;
+		}
+
+		auto vertices = mesh->GetVertices();
+		int vertIndex = 0;
+		for (int i = 0; i < verticesLen; i++)
+		{
+			if ( i != 0 && i % 3 == 0 ) {
+				vertIndex += 3;
+			}
+			
+			auto v = mesh->GetVertices()[i];
+			finalVertices[vertIndex + i] = v;
+		
+		}
+
+
+		for (size_t i = 0; i < len; i++)
+		{
+			float v = finalVertices[i];
+			printf("%f \n", v);
+		}
+
+		drawVertCount = mesh->vectCount;
+
+
+		glBindBuffer(GL_ARRAY_BUFFER, verticesBuffer);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(finalVertices) * len, finalVertices, GL_STATIC_DRAW);
+
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->indicesSize, mesh->GetIndices(), GL_STATIC_DRAW);
+
+
+		//vert
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
 
+		//icolor
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(1);
+		
+				
+		glEnableVertexAttribArray(0);
 		glBindVertexArray(0);
 
 	}
@@ -179,7 +202,7 @@ namespace moon {
 		glBindVertexArray(vao);
 		_shader->Use();
 
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, drawVertCount, GL_UNSIGNED_INT, 0);
 	}
 	
 }
