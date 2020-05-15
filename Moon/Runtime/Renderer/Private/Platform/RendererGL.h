@@ -9,8 +9,6 @@
 
 namespace moon {
 
-	
-
 	//ShaderGL
 	class ShaderGL : public Shader
 	{
@@ -23,6 +21,13 @@ namespace moon {
 		void CompileShader(const char* vertexShaderSource, const char* sourfragmentShaderSourcece) override;
 
 		void Use() override;
+
+		void SetBool(const std::string& name, bool value)override;
+		void SetInt(const std::string& name, int value)override;
+		void SetFloat(const std::string& name, float* value)override;
+		void SetColor(const std::string& name, Color& value) override;
+
+		void FlushUniformInfos() override;
 	private:
 
 		GLuint CreateShader(GLenum type, const char* source);
@@ -61,6 +66,12 @@ namespace moon {
 		void Init(Mesh* mesh, Shader* shader) override;
 
 		void ExecuteCommand() override;
+
+	protected:
+
+		void FilliColorsBuffer(Color* data, int size, float* buffer, int startIndex, int step);
+
+		void FillVerticesBuffer(float* data, int size, float* buffer, int startIndex, int step);
 
 	private:
 

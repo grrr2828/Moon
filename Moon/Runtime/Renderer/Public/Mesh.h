@@ -33,6 +33,11 @@ namespace moon {
 			return _iColors;
 		}
 
+		float* GetUVs()
+		{
+			return uv;
+		}
+
 		int indicesSize;
 		int verticesSize;
 		int colorsSize;

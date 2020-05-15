@@ -65,6 +65,64 @@ namespace moon {
 		glUseProgram(shaderProgram);
 	}
 
+	void ShaderGL::SetBool(const std::string& name, bool value)
+	{
+		Shader::SetBool(name, value);
+
+		_uniformInfos[name].location = glGetUniformLocation(shaderProgram, name.c_str());
+	}
+
+	void ShaderGL::SetInt(const std::string& name, int value)
+	{
+		Shader::SetInt(name, value);
+
+		_uniformInfos[name].location = glGetUniformLocation(shaderProgram, name.c_str());
+
+	}
+
+	void ShaderGL::SetFloat(const std::string& name, float* value)
+	{
+		Shader::SetFloat( name, value );
+
+		_uniformInfos[name].location = glGetUniformLocation(shaderProgram, name.c_str());
+	}
+
+	void ShaderGL::SetColor(const std::string& name, Color& value)
+	{
+		Shader::SetColor( name, value );
+
+		_uniformInfos[name].location = glGetUniformLocation(shaderProgram, name.c_str());
+	}
+
+	void ShaderGL::FlushUniformInfos()
+	{
+		for (auto iter = _uniformInfos.begin(); iter != _uniformInfos.end(); iter++)
+		{
+			UniformInfo info = iter->second;
+
+			
+			
+			switch (info.type)
+			{
+			case UniformInfo::UniformDataType::FLOAT:
+				{
+					float* f = (float*)info.data;
+					glUniform1f(info.location, *f);
+				}
+
+				break;
+			case UniformInfo::UniformDataType::COLOR:
+				{
+					Color* color = (Color*)info.data;
+					glUniform4f(info.location, color->r_float(), color->g_float(), color->b_float(), color->a_float());
+				}
+				break;
+
+			}
+		}
+	}
+
+
 
 	RendererContextGL::RendererContextGL()
 	{
@@ -78,10 +136,10 @@ namespace moon {
 
 	void RendererContextGL::ClearTarget(const Color& color)
 	{
-		float r = (float)color.r() / 255;
-		float g = (float)color.g() / 255;
-		float b = (float)color.b() / 255;
-		float a = (float)color.a() / 255;
+		float r = color.r_float();
+		float g = color.g_float();
+		float b = color.b_float();
+		float a = color.a_float();
 
 		//glClearColor( r, g, b, a );
 		//glClear(GL_COLOR_BUFFER_BIT);
@@ -120,6 +178,35 @@ namespace moon {
 
 	}
 
+	void RendererCommandGL::FilliColorsBuffer(Color* data, int size, float* buffer, int startIndex, int step)
+	{
+		int colorIndex = startIndex;
+		for (int i = 0; i < size; i++)
+		{
+			auto c = data[i];
+			buffer[colorIndex] = c.r_float();
+			buffer[colorIndex + 1] = c.g_float();
+			buffer[colorIndex + 2] = c.b_float();
+
+			colorIndex += step;
+		}
+	}
+
+	void RendererCommandGL::FillVerticesBuffer(float* data, int size, float* buffer, int startIndex, int step)
+	{
+		int vertIndex = startIndex;
+		for (int i = 0; i < size; i++)
+		{
+			if (i != 0 && i % 3 == 0) {
+				vertIndex += step;
+			}
+
+			auto v = data[i];
+			buffer[vertIndex + i] = v;
+
+		}
+	}
+
 	void RendererCommandGL::Init(Mesh* mesh, Shader* shader)
 	{
 		RendererCommand::Init(mesh, shader);
@@ -132,37 +219,21 @@ namespace moon {
 		glBindVertexArray(vao);
 
 		auto iColors = mesh->GetColors();
+
 		int colorLen = mesh->colorsSize / sizeof(iColors[0]);
 		int verticesLen = mesh->verticesSize / sizeof(mesh->GetVertices()[0]);
 
 		int len = verticesLen + colorLen * 3;
 		finalVertices = new float[len];
 
-		int colorIndex = 3;
-		for (int i = 0; i < colorLen; i++)
-		{
-			auto c = iColors[i];
-			finalVertices[colorIndex] = c.r() / 255;
-			finalVertices[colorIndex + 1] = c.g() / 255;
-			finalVertices[colorIndex + 2] = c.b() / 255;
-
-			colorIndex += 6;
-		}
-
 		auto vertices = mesh->GetVertices();
-		int vertIndex = 0;
-		for (int i = 0; i < verticesLen; i++)
-		{
-			if ( i != 0 && i % 3 == 0 ) {
-				vertIndex += 3;
-			}
-			
-			auto v = mesh->GetVertices()[i];
-			finalVertices[vertIndex + i] = v;
 		
-		}
 
+		FillVerticesBuffer(vertices, verticesLen, finalVertices, 0, 3);
+		FilliColorsBuffer(iColors, colorLen, finalVertices, 3, 6);
 
+		
+	
 		for (size_t i = 0; i < len; i++)
 		{
 			float v = finalVertices[i];
@@ -173,7 +244,7 @@ namespace moon {
 
 
 		glBindBuffer(GL_ARRAY_BUFFER, verticesBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(finalVertices) * len, finalVertices, GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(finalVertices[0]) * len, finalVertices, GL_STATIC_DRAW);
 
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer);
@@ -201,6 +272,8 @@ namespace moon {
 
 		glBindVertexArray(vao);
 		_shader->Use();
+		_shader->FlushUniformInfos();
+		
 
 		glDrawElements(GL_TRIANGLES, drawVertCount, GL_UNSIGNED_INT, 0);
 	}

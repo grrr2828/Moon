@@ -30,21 +30,26 @@ public:
 	Color(float _r, float _g, float _b);
 	Color(float _r, float _g, float _b, float _a);
 
-	void			SetColor(int _r, int _g, int _b, int _a);
-	void			SetColor(float _r, float _g, float _b, float _a);
-	void			SetRed(int _r);
-	void			SetGreen(int _g);
-	void			SetBlue(int _b);
-	void			SetAlpha(int _a);
-	void			SetAlpha(float f);
+	void SetColor(int _r, int _g, int _b, int _a);
+	void SetColor(float _r, float _g, float _b, float _a);
+	void SetRed(int _r);
+	void SetGreen(int _g);
+	void SetBlue(int _b);
+	void SetAlpha(int _a);
+	void SetAlpha(float f);
 
-	void			SetHSL(float h, float s, float l);
-	void			GetHSL(float& h, float& s, float& l);
+	void SetHSL(float h, float s, float l);
+	void GetHSL(float& h, float& s, float& l);
 
-	int				r() const { return red; };
-	int				g() const { return green; };
-	int				b() const { return blue; };
-	int				a() const { return alpha; };
+	int	r() const { return red; };
+	int	g() const { return green; };
+	int	b() const { return blue; };
+	int	a() const { return alpha; };
+
+	float r_float() const { return red / 255; };
+	float g_float() const { return green / 255; };
+	float b_float() const { return blue / 255; };
+	float a_float() const { return alpha / 255; };
 
 	Color	operator-(void) const;
 
