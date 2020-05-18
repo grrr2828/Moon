@@ -119,6 +119,7 @@
     </ClInclude>
     <ClInclude Include="3rdParty\glad\include\glad\glad.h" />
     <ClInclude Include="3rdParty\glad\include\KHR\khrplatform.h" />
+    <ClInclude Include="Runtime\Renderer\Public\VertexLayout.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Moon.cpp">
@@ -182,5 +183,6 @@
       <Filter>Engine\Runtime\Renderer\Private</Filter>
     </ClCompile>
     <ClCompile Include="3rdParty\glad\src\glad.c" />
+    <ClCompile Include="Runtime\Renderer\Private\VertexLayout.cpp" />
   </ItemGroup>
 </Project>

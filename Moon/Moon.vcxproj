@@ -173,6 +173,7 @@
     <ClCompile Include="Runtime\Renderer\Private\RendererPipeline.cpp" />
     <ClCompile Include="Runtime\Renderer\Private\RendererProcessor.cpp" />
     <ClCompile Include="Runtime\Renderer\Private\Shader.cpp" />
+    <ClCompile Include="Runtime\Renderer\Private\VertexLayout.cpp" />
     <ClCompile Include="Runtime\Thread\Private\Task.cpp" />
     <ClCompile Include="Runtime\Thread\Private\Thread.cpp" />
   </ItemGroup>
@@ -198,6 +199,7 @@
     <ClInclude Include="Runtime\Renderer\Public\RendererPipeline.h" />
     <ClInclude Include="Runtime\Renderer\Public\RendererProcessor.h" />
     <ClInclude Include="Runtime\Renderer\Public\Shader.h" />
+    <ClInclude Include="Runtime\Renderer\Public\VertexLayout.h" />
     <ClInclude Include="Runtime\Thread\Public\ITask.h" />
     <ClInclude Include="Runtime\Thread\Public\Thread.h" />
   </ItemGroup>

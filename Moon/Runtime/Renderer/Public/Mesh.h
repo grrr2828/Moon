@@ -1,8 +1,11 @@
 #pragma once
 
 #include <vector>
+
+
 #include "Vector.h"
 #include "Color.h"
+#include "VertexLayout.h"
 
 namespace moon {
 
@@ -38,6 +41,11 @@ namespace moon {
 			return uv;
 		}
 
+		VertexLayout* GetVertexLayout()
+		{
+			return vertexLayout;
+		}
+
 		int indicesSize;
 		int verticesSize;
 		int colorsSize;
@@ -49,6 +57,8 @@ namespace moon {
 		float* _vertices = nullptr;
 		float* uv = nullptr;
 		Color* _iColors = nullptr;
+
+		VertexLayout* vertexLayout = nullptr;
 	};
 
 }

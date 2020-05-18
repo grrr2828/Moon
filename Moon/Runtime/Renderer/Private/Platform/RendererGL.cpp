@@ -218,46 +218,107 @@ namespace moon {
 		
 		glBindVertexArray(vao);
 
-		auto iColors = mesh->GetColors();
+		/*auto iColors = mesh->GetColors();
+		int colorLen = 0;
+		bool iColorEnabled = false;
+		bool uvEnabled = false;
+		if (iColors) {
+			colorLen = mesh->colorsSize / sizeof(iColors[0]);
+			iColorEnabled = true;
+		}
 
-		int colorLen = mesh->colorsSize / sizeof(iColors[0]);
 		int verticesLen = mesh->verticesSize / sizeof(mesh->GetVertices()[0]);
 
 		int len = verticesLen + colorLen * 3;
 		finalVertices = new float[len];
 
 		auto vertices = mesh->GetVertices();
-		
 
-		FillVerticesBuffer(vertices, verticesLen, finalVertices, 0, 3);
-		FilliColorsBuffer(iColors, colorLen, finalVertices, 3, 6);
+		int vertStep = 0;
+		int colorStep = 0;
+		int uvStep = 0;
 
-		
+		int vertexAttriSize = 3;
+		int colorAttrSize = 3;
+		int uvAttrSize = 2;
+
+		int colorStartIndex = 3;
+		int uvStartIndex = 6;
+
+
+		if (iColorEnabled) {
+			vertStep = vertexAttriSize;
+			colorStep = vertexAttriSize + colorAttrSize;
+		}
+
+		int stride = vertStep + colorStep + uvStep;
+
+
+
+		FillVerticesBuffer(vertices, verticesLen, finalVertices, 0, vertStep);
+
+		if (iColorEnabled) {
+			FilliColorsBuffer(iColors, colorLen, finalVertices, colorStartIndex, colorStep);
+		}*/
+
 	
+		
+
+		drawVertCount = mesh->vectCount;
+
+		VertexLayout* vertexLayout = mesh->GetVertexLayout();
+		int len = vertexLayout->totalSize;
+		finalVertices = new float[len];
+
+
+		
+
+		glBindBuffer(GL_ARRAY_BUFFER, verticesBuffer);
+		int stride = vertexLayout->stride;
+		const auto& attributes = vertexLayout->GetAttributes();
+		for (const auto& it : attributes)
+		{
+			if (it.type == VertexLayout::AttributeType::Vertex) {
+				auto vertices = mesh->GetVertices();
+				int verticesLen = mesh->verticesSize / sizeof(vertices[0]);
+				FillVerticesBuffer(vertices, verticesLen, finalVertices, 0, it.offSet);
+			}
+			
+			
+			glVertexAttribPointer(it.location, it.count, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(it.offSet * sizeof(float)));
+			glEnableVertexAttribArray(it.location);
+
+			
+		}
+
+		glBufferData(GL_ARRAY_BUFFER, sizeof(finalVertices[0]) * len, finalVertices, GL_STATIC_DRAW);
+
+
+
 		for (size_t i = 0; i < len; i++)
 		{
 			float v = finalVertices[i];
 			printf("%f \n", v);
 		}
 
-		drawVertCount = mesh->vectCount;
-
-
-		glBindBuffer(GL_ARRAY_BUFFER, verticesBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(finalVertices[0]) * len, finalVertices, GL_STATIC_DRAW);
-
-
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->indicesSize, mesh->GetIndices(), GL_STATIC_DRAW);
 
 
-		//vert
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
 
-		//icolor
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-		glEnableVertexAttribArray(1);
+		//vert
+		//glVertexAttribPointer(0, vertexAttriSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)0);
+		//glEnableVertexAttribArray(0);
+
+		//if (iColorEnabled) {
+		//	
+		//	//icolor
+		//	glVertexAttribPointer(1, colorAttrSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(colorStartIndex * sizeof(float)));
+		//	glEnableVertexAttribArray(1);
+		//
+		//}
+
+		
 		
 				
 		glEnableVertexAttribArray(0);
