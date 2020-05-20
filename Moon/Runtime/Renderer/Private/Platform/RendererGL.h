@@ -7,6 +7,7 @@
 #include "Shader.h"
 #include "Command.h"
 #include "Mesh.h"
+#include "Texture2D.h"
 
 namespace moon {
 
@@ -81,5 +82,17 @@ namespace moon {
 
 		float* finalVertices = nullptr;
 	};
+
+
+	class Texture2DGL : public Texture2D
+	{
+	public:
+		
+
+	private:
+
+	};
+
+	
 
 }

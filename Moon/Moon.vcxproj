@@ -93,7 +93,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalUsingDirectories>%(AdditionalUsingDirectories)</AdditionalUsingDirectories>
-      <AdditionalIncludeDirectories>E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Entry\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer\Private\Platform;E:\Users\Administrator\source\repos\Moon\Moon\Runtime;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer;E:\Users\Administrator\source\repos\Moon\Moon\Math;E:\Users\Administrator\source\repos\Moon\Moon\Game\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Thread\Public;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glfw-3.3.2.bin.WIN32\include;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glew-2.1.0\include;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glad\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Entry\Private;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\io;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Common\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Entry\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer\Private\Platform;E:\Users\Administrator\source\repos\Moon\Moon\Runtime;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer;E:\Users\Administrator\source\repos\Moon\Moon\Math;E:\Users\Administrator\source\repos\Moon\Moon\Game\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Renderer\Public;E:\Users\Administrator\source\repos\Moon\Moon\Runtime\Thread\Public;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glfw-3.3.2.bin.WIN32\include;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glew-2.1.0\include;E:\Users\Administrator\source\repos\Moon\Moon\3rdParty\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,11 +156,12 @@
   <ItemGroup>
     <ClCompile Include="3rdParty\glad\src\glad.c" />
     <ClCompile Include="Math\Color.cpp" />
+    <ClCompile Include="Runtime\Common\Private\FileUtils.cpp" />
     <ClCompile Include="Runtime\Entry\Private\AppI.cpp" />
     <ClCompile Include="Math\Vector.cpp" />
     <ClCompile Include="Moon.cpp" />
-    <ClCompile Include="Runtime\Entry\Private\Device_glfw.cpp" />
-    <ClCompile Include="Runtime\Entry\Private\Device_windows.cpp" />
+    <ClCompile Include="Runtime\Entry\Private\Device_glfw.h" />
+    <ClCompile Include="Runtime\Entry\Private\Device_windows.h" />
     <ClCompile Include="Runtime\Renderer\Private\Camera.cpp" />
     <ClCompile Include="Runtime\Renderer\Private\Command.cpp" />
     <ClCompile Include="Runtime\Renderer\Private\CommandBuffer.cpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="Runtime\Renderer\Private\RendererPipeline.cpp" />
     <ClCompile Include="Runtime\Renderer\Private\RendererProcessor.cpp" />
     <ClCompile Include="Runtime\Renderer\Private\Shader.cpp" />
+    <ClCompile Include="Runtime\Renderer\Private\Texture2D.cpp" />
     <ClCompile Include="Runtime\Renderer\Private\VertexLayout.cpp" />
     <ClCompile Include="Runtime\Thread\Private\Task.cpp" />
     <ClCompile Include="Runtime\Thread\Private\Thread.cpp" />
@@ -180,11 +182,14 @@
   <ItemGroup>
     <ClInclude Include="3rdParty\glad\include\glad\glad.h" />
     <ClInclude Include="3rdParty\glad\include\KHR\khrplatform.h" />
+    <ClInclude Include="3rdParty\io\stb_image.h" />
     <ClInclude Include="Math\Color.h" />
+    <ClInclude Include="Runtime\Common\Public\FileUtils.h" />
     <ClInclude Include="Runtime\Context.h" />
     <ClInclude Include="Runtime\Entry\Public\AppI.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="Runtime\Config.h" />
+    <ClInclude Include="Runtime\Entry\Public\Device.h" />
     <ClInclude Include="Runtime\platform.h" />
     <ClInclude Include="Runtime\Renderer\GraphicsEnums.h" />
     <ClInclude Include="Runtime\Renderer\Private\Platform\RendererD3D9.h" />
@@ -199,6 +204,7 @@
     <ClInclude Include="Runtime\Renderer\Public\RendererPipeline.h" />
     <ClInclude Include="Runtime\Renderer\Public\RendererProcessor.h" />
     <ClInclude Include="Runtime\Renderer\Public\Shader.h" />
+    <ClInclude Include="Runtime\Renderer\Public\Texture2D.h" />
     <ClInclude Include="Runtime\Renderer\Public\VertexLayout.h" />
     <ClInclude Include="Runtime\Thread\Public\ITask.h" />
     <ClInclude Include="Runtime\Thread\Public\Thread.h" />

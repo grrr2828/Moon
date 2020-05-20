@@ -59,6 +59,7 @@ namespace moon {
 			Renderer* r = new Renderer();
 
 
+
 			Mesh* mesh = new Mesh();
 			mesh->SetIndices(indices, sizeof(indices));
 			mesh->SetVertices(vertices, sizeof(vertices));

@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include <vector>
+
 #include "AppI.h"
 #include "platform.h"
 
@@ -14,17 +16,20 @@ namespace moon {
 	struct Context
 	{
 
-		AppI* appI;
+		std::vector<AppI*> appList;
 
 		Context() {
-			appI = new AppI();
+			
 		};
 
 		~Context() {
-			if (appI) {
-				delete appI;
-				appI = nullptr;
-			}
+			appList.clear();
+		}
+
+
+		void AddApp(AppI* app)
+		{
+			appList.push_back(app);
 		}
 
 
@@ -37,13 +42,22 @@ namespace moon {
 
 		void update()
 		{
-			appI->Update();
+			int len = appList.size();
+			for (size_t i = 0; i < len; i++)
+			{
+				appList[i]->Update();
+			}
+
 		}
 
 
 		void renderFrame()
 		{
-			appI->RenderFrame();
+			int len = appList.size();
+			for (size_t i = 0; i < len; i++)
+			{
+				appList[i]->RenderFrame();
+			}
 		}
 
 
@@ -102,9 +116,5 @@ static Context s_ctx;
 
 }
 
-int main(int argc, const char* const* argv)
-{
-	return moon::s_ctx.run(argc, argv);
-}
 
 #endif // DEVICE_USE_WINDOWS
