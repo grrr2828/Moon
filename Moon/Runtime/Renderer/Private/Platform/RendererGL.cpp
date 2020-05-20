@@ -1,5 +1,4 @@
 #include "RendererGL.h"
-#include "Mesh.h"
 
 namespace moon {
 
@@ -178,34 +177,46 @@ namespace moon {
 
 	}
 
-	void RendererCommandGL::FilliColorsBuffer(Color* data, int size, float* buffer, int startIndex, int step)
+	void RendererCommandGL::FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num)
 	{
-		int colorIndex = startIndex;
-		for (int i = 0; i < size; i++)
-		{
-			auto c = data[i];
-			buffer[colorIndex] = c.r_float();
-			buffer[colorIndex + 1] = c.g_float();
-			buffer[colorIndex + 2] = c.b_float();
-
-			colorIndex += step;
+		if (source == nullptr) {
+			return;
 		}
-	}
 
-	void RendererCommandGL::FillVerticesBuffer(float* data, int size, float* buffer, int startIndex, int step)
-	{
-		int vertIndex = startIndex;
-		for (int i = 0; i < size; i++)
-		{
-			if (i != 0 && i % 3 == 0) {
-				vertIndex += step;
+		int size = source->size;
+		int index = startIndex;
+
+		if (source->format == Buffer::DataFormat::FLOAT) {
+
+			float* value = (float*)source->data;
+			int count = 0;
+			for (size_t i = 0; i < size; i++)
+			{
+				if (i != 0 && i % num == 0) {
+					index += step;
+					count = 0;
+				}
+
+				auto v = value[i];
+				buffer[index + count] = v;
+				count++;
 			}
+		}
+		else if (source->format == Buffer::DataFormat::COLOR) {
+			Color* value = (Color*)source->data;
+			for (int i = 0; i < size; i++)
+			{
+				auto c = value[i];
+				buffer[index] = c.r_float();
+				buffer[index + 1] = c.g_float();
+				buffer[index + 2] = c.b_float();
 
-			auto v = data[i];
-			buffer[vertIndex + i] = v;
-
+				index += step;
+			}
 		}
 	}
+
+	
 
 	void RendererCommandGL::Init(Mesh* mesh, Shader* shader)
 	{
@@ -218,109 +229,58 @@ namespace moon {
 		
 		glBindVertexArray(vao);
 
-		/*auto iColors = mesh->GetColors();
-		int colorLen = 0;
-		bool iColorEnabled = false;
-		bool uvEnabled = false;
-		if (iColors) {
-			colorLen = mesh->colorsSize / sizeof(iColors[0]);
-			iColorEnabled = true;
-		}
-
-		int verticesLen = mesh->verticesSize / sizeof(mesh->GetVertices()[0]);
-
-		int len = verticesLen + colorLen * 3;
-		finalVertices = new float[len];
-
-		auto vertices = mesh->GetVertices();
-
-		int vertStep = 0;
-		int colorStep = 0;
-		int uvStep = 0;
-
-		int vertexAttriSize = 3;
-		int colorAttrSize = 3;
-		int uvAttrSize = 2;
-
-		int colorStartIndex = 3;
-		int uvStartIndex = 6;
-
-
-		if (iColorEnabled) {
-			vertStep = vertexAttriSize;
-			colorStep = vertexAttriSize + colorAttrSize;
-		}
-
-		int stride = vertStep + colorStep + uvStep;
-
-
-
-		FillVerticesBuffer(vertices, verticesLen, finalVertices, 0, vertStep);
-
-		if (iColorEnabled) {
-			FilliColorsBuffer(iColors, colorLen, finalVertices, colorStartIndex, colorStep);
-		}*/
-
-	
 		
 
-		drawVertCount = mesh->vectCount;
+		drawVertCount = mesh->GetVertices()->size / 3;
 
 		VertexLayout* vertexLayout = mesh->GetVertexLayout();
 		int len = vertexLayout->totalSize;
 		finalVertices = new float[len];
 
 
-		
-
 		glBindBuffer(GL_ARRAY_BUFFER, verticesBuffer);
 		int stride = vertexLayout->stride;
 		const auto& attributes = vertexLayout->GetAttributes();
+
 		for (const auto& it : attributes)
 		{
-			if (it.type == VertexLayout::AttributeType::Vertex) {
-				auto vertices = mesh->GetVertices();
-				int verticesLen = mesh->verticesSize / sizeof(vertices[0]);
-				FillVerticesBuffer(vertices, verticesLen, finalVertices, 0, it.offSet);
+			Buffer* source = nullptr;
+
+			switch (it.type)
+			{
+			case VertexLayout::AttributeType::Vertex:
+				source = mesh->GetVertices();
+				break;
+			case VertexLayout::AttributeType::Color:
+				source = mesh->GetColors();
+				break;
+			case VertexLayout::AttributeType::UV:
+				source = mesh->GetUVs();
+				break;
 			}
 			
-			
-			glVertexAttribPointer(it.location, it.count, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(it.offSet * sizeof(float)));
+			FillBuffer(source, finalVertices, it.offSet, stride, it.num);
+						
+			glVertexAttribPointer(it.location, it.num, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(it.offSet * sizeof(float)));
 			glEnableVertexAttribArray(it.location);
-
 			
 		}
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(finalVertices[0]) * len, finalVertices, GL_STATIC_DRAW);
 
-
-
-		for (size_t i = 0; i < len; i++)
+		/*for (size_t i = 0; i < len; i++)
 		{
 			float v = finalVertices[i];
 			printf("%f \n", v);
-		}
+		}*/
+
+		Buffer* indices = mesh->GetIndices();
+		int* d = (int*)indices->data;
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh->indicesSize, mesh->GetIndices(), GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices->size * sizeof(d[0]), d, GL_STATIC_DRAW);
 
-
-
-		//vert
-		//glVertexAttribPointer(0, vertexAttriSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)0);
-		//glEnableVertexAttribArray(0);
-
-		//if (iColorEnabled) {
-		//	
-		//	//icolor
-		//	glVertexAttribPointer(1, colorAttrSize, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(colorStartIndex * sizeof(float)));
-		//	glEnableVertexAttribArray(1);
-		//
-		//}
-
-		
-		
-				
+	
 		glEnableVertexAttribArray(0);
 		glBindVertexArray(0);
 

@@ -21,10 +21,10 @@ namespace moon {
 		struct Attribute
 		{
 			std::string name;
-			int size;
-			int count;
+			int num;
 			int location;
 			int offSet;
+			int size;
 			AttributeType type;
 
 			Attribute() {};
@@ -37,7 +37,7 @@ namespace moon {
 		VertexLayout();
 		~VertexLayout();
 
-		void SetAttribute(std::string name, int count, int offSet, int location, AttributeType type = AttributeType::None);
+		void SetAttribute(std::string name, int size, int num, int location, AttributeType type = AttributeType::None);
 
 		int stride;
 		int totalSize;

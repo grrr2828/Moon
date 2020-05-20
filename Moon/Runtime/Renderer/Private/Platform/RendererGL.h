@@ -6,6 +6,7 @@
 #include "RendererContextI.h"
 #include "Shader.h"
 #include "Command.h"
+#include "Mesh.h"
 
 namespace moon {
 
@@ -69,9 +70,7 @@ namespace moon {
 
 	protected:
 
-		void FilliColorsBuffer(Color* data, int size, float* buffer, int startIndex, int step);
-
-		void FillVerticesBuffer(float* data, int size, float* buffer, int startIndex, int step);
+		void FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num);
 
 	private:
 

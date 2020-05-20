@@ -9,7 +9,27 @@
 
 namespace moon {
 
-	
+
+	class Buffer
+	{
+	public:
+
+		enum DataFormat
+		{
+			FLOAT,
+			INT,
+			COLOR
+		};
+
+		Buffer();
+		~Buffer();
+
+	public:
+		void* data = nullptr;
+		int size;
+		DataFormat format;
+	};
+
 
 	class Mesh
 	{
@@ -17,26 +37,27 @@ namespace moon {
 		Mesh();
 		~Mesh();
 
-		void SetIndices(int* indices, int size);
-		void SetVertices(float* vertices, int size);
-		void SetColors(Color* colors, int size);
+		void SetIndices(int* data, int size);
+		void SetVertices(float* data, int size);
+		void SetColors(Color* data, int size);
+		void SetUVs(float* data, int size);
 
-		int* GetIndices()
+		Buffer* GetIndices()
 		{
 			return _indices;
 		}
 
-		float* GetVertices()
+		Buffer* GetVertices()
 		{
 			return _vertices;
 		}
 
-		Color* GetColors()
+		Buffer* GetColors()
 		{
 			return _iColors;
 		}
 
-		float* GetUVs()
+		Buffer* GetUVs()
 		{
 			return uv;
 		}
@@ -46,17 +67,12 @@ namespace moon {
 			return vertexLayout;
 		}
 
-		int indicesSize;
-		int verticesSize;
-		int colorsSize;
-
-		int vectCount;
 	private:
 
-		int* _indices = nullptr;
-		float* _vertices = nullptr;
-		float* uv = nullptr;
-		Color* _iColors = nullptr;
+		Buffer* _indices = nullptr;
+		Buffer* _vertices = nullptr;
+		Buffer* uv = nullptr;
+		Buffer* _iColors = nullptr;
 
 		VertexLayout* vertexLayout = nullptr;
 	};

@@ -6,14 +6,19 @@ namespace moon {
 	std::vector<Renderer*> CullResults::visibleRenderers(0);
 
 	float vertices[] = {
-		// first triangle
 		-0.9f, -0.5f, 0.0f,  // left 
-		-0.0f, -0.5f, 0.0f,  // right
+		 0.0f, -0.5f, 0.0f,  // right
 		-0.45f, 0.5f, 0.0f,  // top 
 	};
 
 	int indices[]{
 		0,1,2
+	};
+
+	float uvs[] = {
+		0.55f, 0.55f,
+		0.55f, 0.45f,
+		0.45f, 0.45f,
 	};
 
 	Color iColors[]{
@@ -41,7 +46,7 @@ namespace moon {
 		"uniform vec4 ourColor;\n"
 		"void main()\n"
 		"{\n"
-		"   FragColor = ourColor;\n"
+		"   FragColor = vec4(iColor.x, iColor.y, iColor.z, 1.0);;\n"
 		"}\n\0";
 
 	void CullResults::Cull(RendererContextI* context, Camera* camera)
@@ -58,6 +63,7 @@ namespace moon {
 			mesh->SetIndices(indices, sizeof(indices));
 			mesh->SetVertices(vertices, sizeof(vertices));
 			mesh->SetColors(iColors, sizeof(iColors));
+			mesh->SetUVs(uvs, sizeof(uvs));
 			r->SetMesh(mesh);
 
 			Shader* shader = context->CreateShader();
