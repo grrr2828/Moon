@@ -15,6 +15,8 @@ namespace moon {
 
 		virtual void RenderFrame();
 
+		virtual void Start() {};
+
 		RendererProcessor* rendererProcessor;
 	private:
 

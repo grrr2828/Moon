@@ -86,6 +86,11 @@ namespace moon {
 				return -1;
 			}
 
+			int len = appList.size();
+			for (size_t i = 0; i < len; i++)
+			{
+				appList[i]->Start();
+			}
 			
 
 			while (!glfwWindowShouldClose(window))
