@@ -8,6 +8,8 @@
 namespace moon {
 
 	class Mesh;
+	class Buffer;
+	class VertexLayout;
 
 	class Command
 	{
@@ -33,7 +35,7 @@ namespace moon {
 		RendererCommand();
 		~RendererCommand();
 
-		virtual void Init(Mesh* mesh, Shader* shader);
+		virtual void Init(Mesh* mesh, Buffer* indices, int subMeshOffSet, Shader* shader);
 
 		void ExecuteCommand() override;
 

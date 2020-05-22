@@ -14,6 +14,7 @@ namespace moon {
 
 	Mesh::Mesh() {
 		vertexLayout = new VertexLayout();
+		_indicesArray.resize(MAX_VAL_COUNT);
 	}
 
 	Mesh::~Mesh() {
@@ -30,10 +31,7 @@ namespace moon {
 			_iColors = nullptr;
 		}
 
-		if (_indices) {
-			delete _indices;
-			_indices = nullptr;
-		}
+		_indicesArray.clear();
 
 		if (uv) {
 			delete uv;
@@ -41,15 +39,21 @@ namespace moon {
 		}
 	}
 
-	void Mesh::SetIndices(int* data, int size)
+	void Mesh::SetIndices(int* data, int size, int index)
 	{
-		if (_indices == nullptr) {
-			_indices = new Buffer();
-			_indices->format = Buffer::DataFormat::INT;
+
+		Buffer* indices = _indicesArray[index];
+		if (indices == nullptr) {
+			indices = new Buffer();
+			indices->format = Buffer::DataFormat::INT;
+
+			_indicesArray[index] = indices;
+
+			subMeshCount++;
 		}
-		
-		_indices->data = data;
-		_indices->size = size / sizeof(data[0]);
+
+		indices->data = data;
+		indices->size = size / sizeof(data[0]);
 	}
 
 	void Mesh::SetVertices(float* data, int size)

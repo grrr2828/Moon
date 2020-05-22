@@ -3,17 +3,22 @@
 namespace moon {
 
 	
-	Texture2D::Texture2D(int width, int height, unsigned char* data)
+	Texture2D::Texture2D()
 	{
-		_width = width;
-		_height = height;
-
-		_data = data;
+		
 	}
 
 	Texture2D::~Texture2D()
 	{
 		_data = nullptr;
+	}
+
+	void Texture2D::Init(int width, int height, unsigned char* data)
+	{
+		_width = width;
+		_height = height;
+
+		_data = data;
 	}
 
 

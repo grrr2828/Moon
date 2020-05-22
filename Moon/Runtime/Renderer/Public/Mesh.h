@@ -34,17 +34,24 @@ namespace moon {
 	class Mesh
 	{
 	public:
+
+		enum {
+
+			MAX_VAL_COUNT = 4
+
+		};
+
 		Mesh();
 		~Mesh();
 
-		void SetIndices(int* data, int size);
+		void SetIndices(int* data, int size, int index = 0);
 		void SetVertices(float* data, int size);
 		void SetColors(Color* data, int size);
 		void SetUVs(float* data, int size);
 
-		Buffer* GetIndices()
+		const std::vector<Buffer*>& GetIndicesVec()
 		{
-			return _indices;
+			return _indicesArray;
 		}
 
 		Buffer* GetVertices()
@@ -67,14 +74,16 @@ namespace moon {
 			return vertexLayout;
 		}
 
+		int subMeshCount = 0;
 	private:
+		std::vector<Buffer*> _indicesArray;
 
-		Buffer* _indices = nullptr;
 		Buffer* _vertices = nullptr;
 		Buffer* uv = nullptr;
 		Buffer* _iColors = nullptr;
 
 		VertexLayout* vertexLayout = nullptr;
+
 	};
 
 }

@@ -40,7 +40,6 @@ namespace moon {
 		void SetAttribute(std::string name, int size, int num, int location, AttributeType type = AttributeType::None);
 
 		int stride;
-		int totalSize;
 
 		const std::vector<Attribute>& GetAttributes()
 		{

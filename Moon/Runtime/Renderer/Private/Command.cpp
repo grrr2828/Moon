@@ -14,7 +14,7 @@ namespace moon {
 		
 	}
 
-	void RendererCommand::Init(Mesh* mesh, Shader* shader)
+	void RendererCommand::Init(Mesh* mesh, Buffer* indices, int subMeshOffSet, Shader* shader)
 	{
 		_shader = shader;
 	}

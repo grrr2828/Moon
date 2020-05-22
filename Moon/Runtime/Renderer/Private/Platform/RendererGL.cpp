@@ -159,7 +159,12 @@ namespace moon {
 		return RendererType::OpenGL;
 	}
 
+	Texture2D* RendererContextGL::CreateTexture2D()
+	{
+		return new Texture2DGL();
+	}
 
+	//RendererCommandGL
 	RendererCommandGL::RendererCommandGL()
 	{
 
@@ -177,19 +182,20 @@ namespace moon {
 
 	}
 
-	void RendererCommandGL::FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num)
+	void RendererCommandGL::FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num, int drawVertCount, int subMeshOffSet)
 	{
 		if (source == nullptr) {
 			return;
 		}
 
-		int size = source->size;
 		int index = startIndex;
 
 		if (source->format == Buffer::DataFormat::FLOAT) {
-
+			int size = drawVertCount * num;
 			float* value = (float*)source->data;
 			int count = 0;
+
+			subMeshOffSet *= num;
 			for (size_t i = 0; i < size; i++)
 			{
 				if (i != 0 && i % num == 0) {
@@ -197,16 +203,17 @@ namespace moon {
 					count = 0;
 				}
 
-				auto v = value[i];
+				auto v = value[i + subMeshOffSet];
 				buffer[index + count] = v;
 				count++;
 			}
 		}
 		else if (source->format == Buffer::DataFormat::COLOR) {
+			int size = drawVertCount;
 			Color* value = (Color*)source->data;
 			for (int i = 0; i < size; i++)
 			{
-				auto c = value[i];
+				auto c = value[i + subMeshOffSet];
 				buffer[index] = c.r_float();
 				buffer[index + 1] = c.g_float();
 				buffer[index + 2] = c.b_float();
@@ -218,9 +225,9 @@ namespace moon {
 
 	
 
-	void RendererCommandGL::Init(Mesh* mesh, Shader* shader)
+	void RendererCommandGL::Init(Mesh* mesh, Buffer* indices, int subMeshOffSet, Shader* shader)
 	{
-		RendererCommand::Init(mesh, shader);
+		RendererCommand::Init(mesh, indices, subMeshOffSet, shader);
 
 		glGenBuffers(1, &verticesBuffer);
 		glGenBuffers(1, &indicesBuffer);
@@ -229,18 +236,27 @@ namespace moon {
 		
 		glBindVertexArray(vao);
 
-		
 
-		drawVertCount = mesh->GetVertices()->size / 3;
+		auto vertices = mesh->GetVertices();
+		auto vertexLayout = mesh->GetVertexLayout();
+		auto iColors = mesh->GetColors();
+		auto uvs = mesh->GetUVs();
 
-		VertexLayout* vertexLayout = mesh->GetVertexLayout();
-		int len = vertexLayout->totalSize;
+		drawVertCount = indices->size;
+
+		const auto& attributes = vertexLayout->GetAttributes();
+
+		int len = 0;
+		for (const auto& it : attributes)
+		{
+			len += drawVertCount * it.num;
+		}
+
 		finalVertices = new float[len];
 
 
 		glBindBuffer(GL_ARRAY_BUFFER, verticesBuffer);
 		int stride = vertexLayout->stride;
-		const auto& attributes = vertexLayout->GetAttributes();
 
 		for (const auto& it : attributes)
 		{
@@ -249,17 +265,17 @@ namespace moon {
 			switch (it.type)
 			{
 			case VertexLayout::AttributeType::Vertex:
-				source = mesh->GetVertices();
+				source = vertices;
 				break;
 			case VertexLayout::AttributeType::Color:
-				source = mesh->GetColors();
+				source = iColors;
 				break;
 			case VertexLayout::AttributeType::UV:
-				source = mesh->GetUVs();
+				source = uvs;
 				break;
 			}
 			
-			FillBuffer(source, finalVertices, it.offSet, stride, it.num);
+			FillBuffer(source, finalVertices, it.offSet, stride, it.num, drawVertCount, subMeshOffSet);
 						
 			glVertexAttribPointer(it.location, it.num, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(it.offSet * sizeof(float)));
 			glEnableVertexAttribArray(it.location);
@@ -268,13 +284,12 @@ namespace moon {
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(finalVertices[0]) * len, finalVertices, GL_STATIC_DRAW);
 
-		/*for (size_t i = 0; i < len; i++)
+		for (size_t i = 0; i < len; i++)
 		{
 			float v = finalVertices[i];
 			printf("%f \n", v);
-		}*/
+		}
 
-		Buffer* indices = mesh->GetIndices();
 		int* d = (int*)indices->data;
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer);
@@ -288,8 +303,8 @@ namespace moon {
 
 	void RendererCommandGL::ExecuteCommand()
 	{
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		//glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		//glClear(GL_COLOR_BUFFER_BIT);
 
 		glBindVertexArray(vao);
 		_shader->Use();
@@ -297,6 +312,18 @@ namespace moon {
 		
 
 		glDrawElements(GL_TRIANGLES, drawVertCount, GL_UNSIGNED_INT, 0);
+	}
+
+
+	//Texture2DGL
+	Texture2DGL::Texture2DGL()
+	{
+		
+	}
+
+	Texture2DGL::~Texture2DGL()
+	{
+	
 	}
 	
 }

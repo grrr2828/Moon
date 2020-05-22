@@ -5,10 +5,10 @@ namespace moon {
 	class Texture2D
 	{
 	public:
-		 Texture2D(int width, int height, unsigned char* data);
+		 Texture2D();
 		~Texture2D();
 
-		virtual void Init() {};
+		virtual void Init(int width, int height, unsigned char* data);
 	protected:
 
 		int _width;

@@ -4,26 +4,42 @@
 #include "Device.h"
 #include "Shader.h"
 #include "CullResults.h"
+#include "FileUtils.h"
+#include "Texture2D.h"
 
 namespace moon {
 
 	float vertices[] = {
-		-0.9f, -0.5f, 0.0f,  // left 
-		 0.0f, -0.5f, 0.0f,  // right
-		-0.45f, 0.5f, 0.0f,  // top 
+		-0.9f, -0.5f, 0.0f,  
+		 0.0f, -0.5f, 0.0f,  
+		-0.45f, 0.5f, 0.0f, 
+
+		 0.0f, -0.5f, 0.0f,
+		 1.0f, -0.5f, 0.0f,
+		 0.45f, 0.5f, 0.0f,
 	};
 
-	int indices[]{
-		0,1,2
+	int indices0[]{
+		0,1,2,
+	};
+
+	int indices1[]{
+		3,4,5
 	};
 
 	float uvs[] = {
 		0.55f, 0.55f,
 		0.55f, 0.45f,
 		0.45f, 0.45f,
+		0.55f, 0.55f,
+		0.55f, 0.45f,
+		0.45f, 0.45f,
 	};
 
 	Color iColors[]{
+		Color(1.0f, 0.0f, 0.0f),
+		Color(0.0f, 1.0f, 0.0f),
+		Color(0.0f, 0.0f, 1.0f),
 		Color(1.0f, 0.0f, 0.0f),
 		Color(0.0f, 1.0f, 0.0f),
 		Color(0.0f, 0.0f, 1.0f),
@@ -68,7 +84,9 @@ namespace moon {
 			Renderer* r = new Renderer();
 
 			Mesh* mesh = new Mesh();
-			mesh->SetIndices(indices, sizeof(indices));
+			mesh->SetIndices(indices0, sizeof(indices0), 0);
+			mesh->SetIndices(indices1, sizeof(indices1), 1);
+
 			mesh->SetVertices(vertices, sizeof(vertices));
 			mesh->SetColors(iColors, sizeof(iColors));
 			mesh->SetUVs(uvs, sizeof(uvs));
@@ -82,6 +100,12 @@ namespace moon {
 
 			shader->SetColor("ourColor", ourColor);
 			shader->SetFloat("test", &ourFloat);
+
+			int w, h, channel;
+			std::string imgPath = "E:\\Users\\Administrator\\source\\repos\\Moon\\resources\\textures\\test.jpg";
+			unsigned char* imgData = FileUtils::LoadImage(imgPath.c_str(), &w, &h, &channel, 0);
+
+
 
 			CullResults::visibleRenderers.push_back(r);
 		}

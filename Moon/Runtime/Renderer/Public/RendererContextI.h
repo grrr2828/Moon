@@ -4,6 +4,7 @@
 
 #include "GraphicsEnums.h"
 #include "Color.h"
+#include "Texture2D.h"
 
 namespace moon {
 
@@ -25,6 +26,8 @@ namespace moon {
 		virtual Shader* CreateShader() { return nullptr; };
 
 		virtual RendererCommand* CreateRendererCommand() { return nullptr; };
+
+		virtual Texture2D* CreateTexture2D() { return nullptr; };
 
 
 		virtual void Submit();

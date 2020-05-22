@@ -124,6 +124,7 @@
     <ClInclude Include="3rdParty\io\stb_image.h" />
     <ClInclude Include="Runtime\Common\Public\FileUtils.h" />
     <ClInclude Include="Runtime\Entry\Public\Device.h" />
+    <ClInclude Include="Runtime\Renderer\Public\Material.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Moon.cpp">
@@ -190,5 +191,6 @@
     <ClCompile Include="Runtime\Entry\Private\Device_glfw.h">
       <Filter>Engine\Runtime\Entry\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Runtime\Renderer\Private\Material.cpp" />
   </ItemGroup>
 </Project>

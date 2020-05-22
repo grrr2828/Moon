@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "Mesh.h"
 #include "Command.h"
 
@@ -22,8 +24,7 @@ namespace moon {
 
 		Shader* _shader = nullptr;
 
-		RendererCommand* _command = nullptr;
-
+		std::vector<RendererCommand*> _rendererCmdList;
 	};
 
 }

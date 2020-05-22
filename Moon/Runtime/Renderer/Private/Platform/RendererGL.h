@@ -55,6 +55,8 @@ namespace moon {
 
 		RendererCommand* CreateRendererCommand() override;
 
+		Texture2D* CreateTexture2D() override;
+
 	};
 
 	class RendererCommandGL : public RendererCommand
@@ -65,13 +67,13 @@ namespace moon {
 		RendererCommandGL();
 		~RendererCommandGL();
 
-		void Init(Mesh* mesh, Shader* shader) override;
+		void Init(Mesh* mesh, Buffer* indices, int subMeshOffSet, Shader* shader) override;
 
 		void ExecuteCommand() override;
 
 	protected:
 
-		void FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num);
+		void FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num, int drawVertCount, int subMeshOffSet);
 
 	private:
 
@@ -88,7 +90,8 @@ namespace moon {
 	{
 	public:
 		
-
+		Texture2DGL();
+		~Texture2DGL();
 	private:
 
 	};
