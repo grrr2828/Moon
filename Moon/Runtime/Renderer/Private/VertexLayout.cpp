@@ -31,6 +31,7 @@ namespace moon {
 	void VertexLayout::RefreshAttributes()
 	{
 		stride = 0;
+		totalSize = 0;
 
 		int len = _attributes.size();
 
@@ -44,6 +45,8 @@ namespace moon {
 			attr.offSet = offSet;
 
 			offSet += attr.num;
+
+			totalSize += attr.size;
 
 		}
 

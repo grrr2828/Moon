@@ -35,11 +35,13 @@ namespace moon {
 		RendererCommand();
 		~RendererCommand();
 
-		virtual void Init(Mesh* mesh, Buffer* indices, int subMeshOffSet, Shader* shader);
+		virtual void Init(Mesh* mesh, Buffer* indices, Shader* shader);
 
 		void ExecuteCommand() override;
 
 		Shader* _shader = nullptr;
+
+	protected:
 
 	private:
 	};

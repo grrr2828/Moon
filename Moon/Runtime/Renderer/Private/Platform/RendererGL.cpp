@@ -182,7 +182,7 @@ namespace moon {
 
 	}
 
-	void RendererCommandGL::FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num, int drawVertCount, int subMeshOffSet)
+	void RendererCommandGL::FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num, int size)
 	{
 		if (source == nullptr) {
 			return;
@@ -191,11 +191,9 @@ namespace moon {
 		int index = startIndex;
 
 		if (source->format == Buffer::DataFormat::FLOAT) {
-			int size = drawVertCount * num;
 			float* value = (float*)source->data;
 			int count = 0;
 
-			subMeshOffSet *= num;
 			for (size_t i = 0; i < size; i++)
 			{
 				if (i != 0 && i % num == 0) {
@@ -203,17 +201,20 @@ namespace moon {
 					count = 0;
 				}
 
-				auto v = value[i + subMeshOffSet];
+				auto v = value[i];
 				buffer[index + count] = v;
+
+				//printf("%i = %f \n", index + count, v);
+
 				count++;
 			}
 		}
 		else if (source->format == Buffer::DataFormat::COLOR) {
-			int size = drawVertCount;
+			size /= num;
 			Color* value = (Color*)source->data;
 			for (int i = 0; i < size; i++)
 			{
-				auto c = value[i + subMeshOffSet];
+				auto c = value[i];
 				buffer[index] = c.r_float();
 				buffer[index + 1] = c.g_float();
 				buffer[index + 2] = c.b_float();
@@ -223,11 +224,10 @@ namespace moon {
 		}
 	}
 
-	
 
-	void RendererCommandGL::Init(Mesh* mesh, Buffer* indices, int subMeshOffSet, Shader* shader)
+	void RendererCommandGL::Init(Mesh* mesh, Buffer* indices, Shader* shader)
 	{
-		RendererCommand::Init(mesh, indices, subMeshOffSet, shader);
+		RendererCommand::Init(mesh, indices, shader);
 
 		glGenBuffers(1, &verticesBuffer);
 		glGenBuffers(1, &indicesBuffer);
@@ -235,7 +235,6 @@ namespace moon {
 		glGenVertexArrays(1, &vao);
 		
 		glBindVertexArray(vao);
-
 
 		auto vertices = mesh->GetVertices();
 		auto vertexLayout = mesh->GetVertexLayout();
@@ -246,14 +245,8 @@ namespace moon {
 
 		const auto& attributes = vertexLayout->GetAttributes();
 
-		int len = 0;
-		for (const auto& it : attributes)
-		{
-			len += drawVertCount * it.num;
-		}
-
+		int len = vertexLayout->totalSize;
 		finalVertices = new float[len];
-
 
 		glBindBuffer(GL_ARRAY_BUFFER, verticesBuffer);
 		int stride = vertexLayout->stride;
@@ -274,26 +267,29 @@ namespace moon {
 				source = uvs;
 				break;
 			}
-			
-			FillBuffer(source, finalVertices, it.offSet, stride, it.num, drawVertCount, subMeshOffSet);
-						
+
+			FillBuffer(source, finalVertices, it.offSet, stride, it.num, it.size);
+
 			glVertexAttribPointer(it.location, it.num, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(it.offSet * sizeof(float)));
 			glEnableVertexAttribArray(it.location);
-			
+
 		}
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(finalVertices[0]) * len, finalVertices, GL_STATIC_DRAW);
 
-		for (size_t i = 0; i < len; i++)
+		
+
+		/*for (size_t i = 0; i < len; i++)
 		{
 			float v = finalVertices[i];
 			printf("%f \n", v);
-		}
+		}*/
+
 
 		int* d = (int*)indices->data;
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesBuffer);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices->size * sizeof(d[0]), d, GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, drawVertCount * sizeof(d[0]), d, GL_STATIC_DRAW);
 
 	
 		glEnableVertexAttribArray(0);

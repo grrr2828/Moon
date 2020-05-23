@@ -47,7 +47,7 @@ namespace moon {
 			{
 				auto cmd = context->CreateRendererCommand();
 				auto indices = indicesVec[i];
-				cmd->Init(_mesh, indices, subMeshOffSet, _shader);
+				cmd->Init(_mesh, indices, _shader);
 				_rendererCmdList.push_back(cmd);
 
 				subMeshOffSet += indices->size;

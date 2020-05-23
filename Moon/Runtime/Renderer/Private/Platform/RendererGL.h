@@ -67,13 +67,13 @@ namespace moon {
 		RendererCommandGL();
 		~RendererCommandGL();
 
-		void Init(Mesh* mesh, Buffer* indices, int subMeshOffSet, Shader* shader) override;
+		void Init(Mesh* mesh, Buffer* indices, Shader* shader) override;
 
 		void ExecuteCommand() override;
 
 	protected:
 
-		void FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num, int drawVertCount, int subMeshOffSet);
+		void FillBuffer(Buffer* source, float* buffer, int startIndex, int step, int num, int size);
 
 	private:
 

@@ -24,7 +24,7 @@ namespace moon {
 	};
 
 	int indices1[]{
-		3,4,5
+		3,4,5,
 	};
 
 	float uvs[] = {
@@ -85,11 +85,13 @@ namespace moon {
 
 			Mesh* mesh = new Mesh();
 			mesh->SetIndices(indices0, sizeof(indices0), 0);
-			mesh->SetIndices(indices1, sizeof(indices1), 1);
+			//mesh->SetIndices(indices1, sizeof(indices1), 1);
 
 			mesh->SetVertices(vertices, sizeof(vertices));
 			mesh->SetColors(iColors, sizeof(iColors));
 			mesh->SetUVs(uvs, sizeof(uvs));
+
+
 			r->SetMesh(mesh);
 
 			auto r_ctx = rendererProcessor->r_ctx;
