@@ -7,7 +7,7 @@
 #include "Shader.h"
 #include "Command.h"
 #include "Mesh.h"
-#include "Texture2D.h"
+#include "Texture.h"
 
 namespace moon {
 
@@ -30,10 +30,13 @@ namespace moon {
 		void SetColor(const std::string& name, Color& value) override;
 
 		void FlushUniformInfos() override;
+
+		void SetMainTexture(Texture2D* texture) override;
 	private:
 
 		GLuint CreateShader(GLenum type, const char* source);
 		GLuint shaderProgram = 0;
+		GLuint mainTextureId = 0;
 	};
 
 
@@ -67,7 +70,7 @@ namespace moon {
 		RendererCommandGL();
 		~RendererCommandGL();
 
-		void Init(Mesh* mesh, Buffer* indices, Shader* shader) override;
+		void Init(Mesh* mesh, const std::vector<Material*>& materials) override;
 
 		void ExecuteCommand() override;
 
@@ -78,9 +81,10 @@ namespace moon {
 	private:
 
 		GLuint verticesBuffer = 0;
-		GLuint indicesBuffer = 0;
 		GLuint vao = 0;
-		int drawVertCount = 0;
+
+
+		GLuint* indicesBuffers;
 
 		float* finalVertices = nullptr;
 	};

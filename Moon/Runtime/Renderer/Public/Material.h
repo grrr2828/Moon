@@ -1,19 +1,29 @@
 #pragma once
 
 #include "Shader.h"
-#include "Texture2D.h"
+#include "Texture.h"
 
 namespace moon {
 
 	class Material
 	{
 	public:
+	
 		Material();
 		~Material();
 
 		void SetShader(Shader* shader);
 
-		Texture2D* mainTexture;
+		Shader* GetShader()
+		{
+			return _shader;
+		}
+
+		void SetMainTexture(Texture2D* texture)
+		{
+			_shader->SetMainTexture(texture);
+		}
+
 	private:
 
 

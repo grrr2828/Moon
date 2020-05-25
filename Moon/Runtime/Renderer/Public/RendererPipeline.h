@@ -5,6 +5,7 @@
 #include "Renderer.h"
 #include "Camera.h"
 #include "RendererContextI.h"
+#include "CommandBuffer.h"
 
 namespace moon {
 
@@ -17,7 +18,10 @@ namespace moon {
 		void Render(RendererContextI* context, std::vector<Camera*>& cameras);
 
 		virtual void DrawRenderers(std::vector<Renderer*>& renderers);
-	
+
+	private:
+
+		CommandBuffer* commandBuffer = nullptr;
 
 	};
 

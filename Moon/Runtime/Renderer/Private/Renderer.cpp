@@ -8,7 +8,7 @@ namespace moon {
 	//Renderer
 	Renderer::Renderer()
 	{
-		
+		materials.resize(MAX_VAL_COUNT);
 	}
 
 	Renderer::~Renderer()
@@ -28,38 +28,25 @@ namespace moon {
 		_mesh = mesh;
 	}
 
-	void Renderer::SetShader(Shader* shader)
+	void Renderer::SetMaterial(Material* material, int index)
 	{
-		_shader = shader;
+		materials[index] = material;
 	}
 
 
-	void Renderer::Draw(RendererContextI* context)
+	void Renderer::Draw(RendererContextI* context, CommandBuffer* commandBuffer)
 	{
 		if (_rendererCmdList.size() == 0) {
 			
-			int count = _mesh->subMeshCount;
-			int subMeshOffSet = 0;
-
-			auto indicesVec = _mesh->GetIndicesVec();
-
-			for (size_t i = 0; i < count; i++)
-			{
-				auto cmd = context->CreateRendererCommand();
-				auto indices = indicesVec[i];
-				cmd->Init(_mesh, indices, _shader);
-				_rendererCmdList.push_back(cmd);
-
-				subMeshOffSet += indices->size;
-			}
-
-			
+			auto cmd = context->CreateRendererCommand();
+			cmd->Init(_mesh, materials);
+			_rendererCmdList.push_back(cmd);
 		}
 
 		int s = _rendererCmdList.size();
 		for (size_t i = 0; i < s; i++)
 		{
-			context->AddCommand(_rendererCmdList[i]);
+			commandBuffer->Add(_rendererCmdList[i]);
 		}
 	}
 

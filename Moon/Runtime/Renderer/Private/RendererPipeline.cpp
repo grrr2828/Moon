@@ -6,11 +6,16 @@ namespace moon {
 
 	RendererPipeline::RendererPipeline()
 	{
-
+		commandBuffer = new CommandBuffer();
 	}
 
 	RendererPipeline::~RendererPipeline()
 	{
+		if (commandBuffer) {
+			commandBuffer->Clear();
+			delete commandBuffer;
+			commandBuffer = nullptr;
+		}
 
 	}
 
@@ -37,12 +42,12 @@ namespace moon {
 		for (auto &renderer : visibleRenderers)
 		{
 			if (renderer) {
-				renderer->Draw(context);
+				renderer->Draw(context, commandBuffer);
 			}
 		}
 
 
-		context->Submit();
+		commandBuffer->Submit();
 	}
 
 }

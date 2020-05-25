@@ -5,7 +5,7 @@
 #include "Shader.h"
 #include "CullResults.h"
 #include "FileUtils.h"
-#include "Texture2D.h"
+#include "Texture.h"
 
 namespace moon {
 
@@ -67,6 +67,8 @@ namespace moon {
 		"   FragColor = vec4(iColor.x, iColor.y, iColor.z, 1.0);;\n"
 		"}\n\0";
 
+	Texture2D* texture;
+
 	class Test : public AppI
 	{
 	public:
@@ -98,7 +100,10 @@ namespace moon {
 
 			Shader* shader = r_ctx->CreateShader();
 			shader->CompileShader(vertexShaderSource, fragmentShaderSource);
-			r->SetShader(shader);
+			
+			Material* material = new Material();
+			material->SetShader(shader);
+			r->SetMaterial(material);
 
 			shader->SetColor("ourColor", ourColor);
 			shader->SetFloat("test", &ourFloat);
@@ -107,7 +112,9 @@ namespace moon {
 			std::string imgPath = "E:\\Users\\Administrator\\source\\repos\\Moon\\resources\\textures\\test.jpg";
 			unsigned char* imgData = FileUtils::LoadImage(imgPath.c_str(), &w, &h, &channel, 0);
 
-
+			texture = new Texture2D();
+			texture->Init(w, h, imgData);
+			material->SetMainTexture(texture);
 
 			CullResults::visibleRenderers.push_back(r);
 		}

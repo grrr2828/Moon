@@ -12,7 +12,7 @@ namespace moon {
 		Clear();
 	}
 
-	void CommandBuffer::Exce()
+	void CommandBuffer::Submit()
 	{
 		int size = buffer.size();
 

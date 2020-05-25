@@ -120,11 +120,11 @@
     <ClInclude Include="3rdParty\glad\include\glad\glad.h" />
     <ClInclude Include="3rdParty\glad\include\KHR\khrplatform.h" />
     <ClInclude Include="Runtime\Renderer\Public\VertexLayout.h" />
-    <ClInclude Include="Runtime\Renderer\Public\Texture2D.h" />
     <ClInclude Include="3rdParty\io\stb_image.h" />
     <ClInclude Include="Runtime\Common\Public\FileUtils.h" />
     <ClInclude Include="Runtime\Entry\Public\Device.h" />
     <ClInclude Include="Runtime\Renderer\Public\Material.h" />
+    <ClInclude Include="Runtime\Renderer\Public\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Moon.cpp">
@@ -183,7 +183,6 @@
     </ClCompile>
     <ClCompile Include="3rdParty\glad\src\glad.c" />
     <ClCompile Include="Runtime\Renderer\Private\VertexLayout.cpp" />
-    <ClCompile Include="Runtime\Renderer\Private\Texture2D.cpp" />
     <ClCompile Include="Runtime\Common\Private\FileUtils.cpp" />
     <ClCompile Include="Runtime\Entry\Private\Device_windows.h">
       <Filter>Engine\Runtime\Entry\Private</Filter>
@@ -192,5 +191,6 @@
       <Filter>Engine\Runtime\Entry\Private</Filter>
     </ClCompile>
     <ClCompile Include="Runtime\Renderer\Private\Material.cpp" />
+    <ClCompile Include="Runtime\Renderer\Private\Texture.cpp" />
   </ItemGroup>
 </Project>

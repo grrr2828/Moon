@@ -4,6 +4,7 @@
 
 #include "RendererContextI.h"
 #include "Color.h"
+#include "Material.h"
 
 namespace moon {
 
@@ -35,14 +36,12 @@ namespace moon {
 		RendererCommand();
 		~RendererCommand();
 
-		virtual void Init(Mesh* mesh, Buffer* indices, Shader* shader);
+		virtual void Init(Mesh* mesh, const std::vector<Material*>& materials);
 
 		void ExecuteCommand() override;
-
-		Shader* _shader = nullptr;
-
 	protected:
-
+		std::vector<Material*> _materials;
+		Mesh* _mesh = nullptr;
 	private:
 	};
 

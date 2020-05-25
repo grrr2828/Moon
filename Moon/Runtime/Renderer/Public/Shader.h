@@ -4,7 +4,7 @@
 #include <unordered_map>
 
 #include "Color.h"
-
+#include "Texture.h"
 
 namespace moon {
 
@@ -42,6 +42,13 @@ namespace moon {
 		virtual void SetColor(const std::string& name, Color& value);
 
 		virtual void FlushUniformInfos() {};
+
+		virtual void SetMainTexture(Texture2D* mainTexture)
+		{
+			_mainTexture = mainTexture;
+		}
+
+		Texture2D* _mainTexture;
 	protected:
 
 		std::unordered_map<std::string, UniformInfo> _uniformInfos;

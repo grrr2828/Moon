@@ -14,9 +14,10 @@ namespace moon {
 		
 	}
 
-	void RendererCommand::Init(Mesh* mesh, Buffer* indices, Shader* shader)
+	void RendererCommand::Init(Mesh* mesh, const std::vector<Material*>& materials)
 	{
-		_shader = shader;
+		_mesh = mesh;
+		_materials = materials;
 	}
 
 	void RendererCommand::ExecuteCommand()

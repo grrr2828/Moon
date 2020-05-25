@@ -19,7 +19,7 @@ namespace moon {
 
 		void Clear();
 
-		void Exce();
+		void Submit();
 
 	private:
 

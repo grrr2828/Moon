@@ -4,7 +4,7 @@
 
 #include "GraphicsEnums.h"
 #include "Color.h"
-#include "Texture2D.h"
+#include "Texture.h"
 
 namespace moon {
 
@@ -28,14 +28,6 @@ namespace moon {
 		virtual RendererCommand* CreateRendererCommand() { return nullptr; };
 
 		virtual Texture2D* CreateTexture2D() { return nullptr; };
-
-
-		virtual void Submit();
-		void AddCommand(RendererCommand* cmd);
-
-	private:
-
-		std::vector<RendererCommand*> renderQueue;
 		
 	};
 
